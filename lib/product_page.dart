@@ -16,14 +16,21 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
-    final product = args is Product
-        ? args
-        : Product(
-            title: 'Unknown product',
-            price: '',
-            imageUrl: '',
-            description: '',
-          );
+
+    if (args is! Product) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Product'),
+          backgroundColor: const Color(0xFF4d2963),
+        ),
+        body: const Center(
+          child: Text('Product not found', style: TextStyle(fontSize: 18)),
+        ),
+      );
+    }
+
+    final product = args;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,7 +41,7 @@ class ProductPage extends StatelessWidget {
               onButtonPressed: placeholderCallbackForButtons,
             ),
 
-            // Product details
+            // Product details (from route arguments)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.all(24),
@@ -134,7 +141,7 @@ class ProductPage extends StatelessWidget {
               color: Colors.grey[50],
               padding: const EdgeInsets.all(24),
               child: const Text(
-                'Placeholder Footer',
+                'Open Mon–Fri 9:00–17:00 • shop.upsu.net • info@upsu.net',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
