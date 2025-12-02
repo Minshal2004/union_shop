@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/app_header.dart';
+import 'package:union_shop/models/product.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -44,6 +45,40 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Sample product data — replace with real data source when available
+    final products = <Product>[
+      Product(
+        title: 'Portsmouth City Magnet',
+        price: '£10.00',
+        imageUrl:
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+        description:
+            'Collectible Portsmouth magnet — great for fridges and gifts.',
+      ),
+      Product(
+        title: 'Union Hoodie',
+        price: '£25.00',
+        imageUrl:
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+        description: 'Comfortable unisex hoodie with Union Shop branding.',
+      ),
+      Product(
+        title: 'City Postcard Pack',
+        price: '£15.00',
+        imageUrl:
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+        description:
+            'Set of 5 postcards featuring the city — perfect for souvenirs.',
+      ),
+      Product(
+        title: 'Union Tote Bag',
+        price: '£8.00',
+        imageUrl:
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+        description: 'Reusable tote bag with Union logo.',
+      ),
+    ];
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -156,32 +191,13 @@ class HomeScreen extends StatelessWidget {
                           MediaQuery.of(context).size.width > 600 ? 2 : 1,
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
+                      children: products
+                          .map((p) => ProductCard(
+                                title: p.title,
+                                price: p.price,
+                                imageUrl: p.imageUrl,
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),
