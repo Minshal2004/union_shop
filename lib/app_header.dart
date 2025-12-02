@@ -69,7 +69,8 @@ class AppHeader extends StatelessWidget {
                             child: const Text('About'),
                           ),
                           TextButton(
-                            onPressed: onButtonPressed,
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/collections'),
                             child: const Text('Collections'),
                           ),
                           TextButton(
