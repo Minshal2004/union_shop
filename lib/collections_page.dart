@@ -61,6 +61,40 @@ class CollectionsPage extends StatelessWidget {
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
+                  // Sort and filter controls (non-functional placeholders)
+                  Row(
+                    children: [
+                      DropdownButton<String>(
+                        value: 'Relevance',
+                        items: const [
+                          DropdownMenuItem(
+                              value: 'Relevance', child: Text('Relevance')),
+                          DropdownMenuItem(
+                              value: 'PriceLow',
+                              child: Text('Price: Low to High')),
+                          DropdownMenuItem(
+                              value: 'PriceHigh',
+                              child: Text('Price: High to Low')),
+                        ],
+                        onChanged: (_) {},
+                      ),
+                      const SizedBox(width: 16),
+                      DropdownButton<String>(
+                        value: 'All',
+                        items: const [
+                          DropdownMenuItem(value: 'All', child: Text('All')),
+                          DropdownMenuItem(
+                              value: 'Clothing', child: Text('Clothing')),
+                          DropdownMenuItem(
+                              value: 'Accessories', child: Text('Accessories')),
+                          DropdownMenuItem(
+                              value: 'Gifts', child: Text('Gifts')),
+                        ],
+                        onChanged: (_) {},
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
                   const Text(
                     'Browse our product collections — official merch and essentials for campus life.',
                     style: TextStyle(fontSize: 16, height: 1.4),
