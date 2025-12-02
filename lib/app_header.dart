@@ -56,57 +56,69 @@ class AppHeader extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            size: 18,
-                            color: Colors.grey,
+                        Tooltip(
+                          message: 'Search products',
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.search,
+                              size: 18,
+                              color: Colors.grey,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: onButtonPressed,
                           ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onButtonPressed,
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.person_outline,
-                            size: 18,
-                            color: Colors.grey,
+                        Tooltip(
+                          message: 'Your account',
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.person_outline,
+                              size: 18,
+                              color: Colors.grey,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: onButtonPressed,
                           ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onButtonPressed,
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.shopping_bag_outlined,
-                            size: 18,
-                            color: Colors.grey,
+                        Tooltip(
+                          message: 'View basket',
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.shopping_bag_outlined,
+                              size: 18,
+                              color: Colors.grey,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: onButtonPressed,
                           ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onButtonPressed,
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.menu,
-                            size: 18,
-                            color: Colors.grey,
+                        Tooltip(
+                          message: 'Open menu',
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.menu,
+                              size: 18,
+                              color: Colors.grey,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            constraints: const BoxConstraints(
+                              minWidth: 32,
+                              minHeight: 32,
+                            ),
+                            onPressed: onButtonPressed,
                           ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onButtonPressed,
                         ),
                       ],
                     ),
