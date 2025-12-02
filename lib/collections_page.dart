@@ -134,7 +134,7 @@ class CollectionsPage extends StatelessWidget {
                               clipBehavior: Clip.hardEdge,
                               child: InkWell(
                                 onTap: () =>
-                                    placeholderCallbackForButtons(context),
+                                    Navigator.pushNamed(context, '/collection'),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
