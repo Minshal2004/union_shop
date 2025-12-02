@@ -248,6 +248,12 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 1,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'New season items and student essentials — browse collection online or pick up in-store.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
                     const SizedBox(height: 48),
                     GridView.count(
                       shrinkWrap: true,
