@@ -20,7 +20,7 @@ class AppHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
             child: const Text(
-              'SUMMER SALE — 20% off Union Shop merchandise! In-store & online until 31 July. Visit shop.upsu.net for details.',
+              'NEW TERM STOCK — University essentials and branded merch available now. Free click & collect for students. Visit shop.upsu.net for opening times and offers.',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
@@ -31,7 +31,7 @@ class AppHeader extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: onLogoTap,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',

@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Placeholder Hero Title',
+                          'Union Shop – Official Students\' Union Store',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          "This is placeholder text for the hero section.",
+                          "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
@@ -170,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'FEATURED PRODUCTS',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -179,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'New season items and student essentials — browse collection online or pick up in-store.',
+                      'Essential campus kit and new arrivals — shop online or collect in-store at the Students\' Union.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
@@ -208,7 +208,7 @@ class HomeScreen extends StatelessWidget {
               color: Colors.grey[50],
               padding: const EdgeInsets.all(24),
               child: const Text(
-                'Placeholder Footer',
+                'Open Mon–Fri 9:00–17:00 • shop.upsu.net • info@upsu.net',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
