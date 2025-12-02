@@ -39,8 +39,13 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamed(context, '/product');
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+  void placeholderCallbackForButtons(BuildContext context) {
+    // Show a brief notice for header actions that are not implemented yet
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content:
+          Text('Feature coming soon — visit shop.upsu.net for full service'),
+      duration: Duration(seconds: 2),
+    ));
   }
 
   @override
@@ -86,7 +91,7 @@ class HomeScreen extends StatelessWidget {
             // Header
             AppHeader(
               onLogoTap: () => navigateToHome(context),
-              onButtonPressed: placeholderCallbackForButtons,
+              onButtonPressed: () => placeholderCallbackForButtons(context),
             ),
 
             // Hero Section
@@ -308,4 +313,4 @@ class _ProductCardState extends State<ProductCard> {
   }
 }
 
-//test comment
+// end of file
