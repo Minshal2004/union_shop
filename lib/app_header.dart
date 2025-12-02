@@ -50,6 +50,39 @@ class AppHeader extends StatelessWidget {
                       },
                     ),
                   ),
+                  // Navigation links for wider screens
+                  Builder(builder: (context) {
+                    final isWide = MediaQuery.of(context).size.width > 600;
+                    if (!isWide) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.pushNamed(context, '/'),
+                            child: const Text('Home'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/about'),
+                            child: const Text('About'),
+                          ),
+                          TextButton(
+                            onPressed: onButtonPressed,
+                            child: const Text('Collections'),
+                          ),
+                          TextButton(
+                            onPressed: onButtonPressed,
+                            child: const Text('Sale'),
+                          ),
+                          TextButton(
+                            onPressed: onButtonPressed,
+                            child: const Text('Sign In'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                   const Spacer(),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
