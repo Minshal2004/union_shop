@@ -3,6 +3,7 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/about_page.dart';
+import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/app_footer.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class UnionShopApp extends StatelessWidget {
       routes: {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
+        '/collections': (context) => const CollectionsPage(),
       },
     );
   }
