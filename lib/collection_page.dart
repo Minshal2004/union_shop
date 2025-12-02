@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/app_header.dart';
+import 'package:union_shop/app_footer.dart';
 
-class HoodiesPage extends StatelessWidget {
+class CollectionPage extends StatelessWidget {
+  const CollectionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
