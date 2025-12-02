@@ -3,6 +3,7 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/about_page.dart';
+import 'package:union_shop/app_footer.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -212,19 +213,7 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Open Mon–Fri 9:00–17:00 • shop.upsu.net • info@upsu.net',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+            AppFooter(),
           ],
         ),
       ),
