@@ -197,7 +197,13 @@ class CollectionsPage extends StatelessWidget {
                         elevation: 2,
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
-                          onTap: () => placeholderCallbackForButtons(context),
+                          onTap: () {
+                            if ((c['title'] ?? '') == 'Hoodies') {
+                              Navigator.pushNamed(context, '/collection');
+                            } else {
+                              placeholderCallbackForButtons(context);
+                            }
+                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
