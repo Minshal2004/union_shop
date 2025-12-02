@@ -198,7 +198,8 @@ class CollectionsPage extends StatelessWidget {
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
                           onTap: () {
-                            if ((c['title'] ?? '') == 'Hoodies') {
+                            final title = c['title'] ?? '';
+                            if (title == 'Hoodies') {
                               Navigator.pushNamed(context, '/collection');
                             } else {
                               placeholderCallbackForButtons(context);
