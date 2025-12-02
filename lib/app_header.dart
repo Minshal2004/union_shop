@@ -79,7 +79,8 @@ class AppHeader extends StatelessWidget {
                             child: const Text('Sale'),
                           ),
                           TextButton(
-                            onPressed: onButtonPressed,
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/sign-in'),
                             child: const Text('Sign In'),
                           ),
                         ],
