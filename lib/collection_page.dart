@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/app_header.dart';
-import 'package:union_shop/app_footer.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
@@ -9,25 +7,11 @@ class CollectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hoodies Collection'),
+        title: const Text('Hoodies'),
+        backgroundColor: const Color(0xFF4d2963),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Hoodies Collection',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to another page
-              },
-              child: const Text('Explore More'),
-            ),
-          ],
-        ),
+      body: const Center(
+        child: Text('Hoodies collection page', style: TextStyle(fontSize: 18)),
       ),
     );
   }
