@@ -52,7 +52,8 @@ class AppHeader extends StatelessWidget {
                   ),
                   // Navigation links for wider screens
                   Builder(builder: (context) {
-                    final isWide = MediaQuery.of(context).size.width > 600;
+                    // Only show text navigation on desktop / wide layouts
+                    final isWide = MediaQuery.of(context).size.width > 800;
                     if (!isWide) return const SizedBox.shrink();
                     return Padding(
                       padding: const EdgeInsets.only(left: 16.0),
