@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/models/product.dart';
+import 'package:union_shop/app_footer.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -140,19 +141,7 @@ class ProductPage extends StatelessWidget {
             ),
 
             // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Open Mon–Fri 9:00–17:00 • shop.upsu.net • info@upsu.net',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+            AppFooter(),
           ],
         ),
       ),
