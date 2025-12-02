@@ -11,7 +11,8 @@ class SignInPage extends StatelessWidget {
 
   void placeholderCallbackForButtons(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Feature coming soon — visit shop.upsu.net for full service'),
+      content:
+          Text('Feature coming soon — visit shop.upsu.net for full service'),
       duration: Duration(seconds: 2),
     ));
   }
@@ -26,7 +27,6 @@ class SignInPage extends StatelessWidget {
               onLogoTap: () => navigateToHome(context),
               onButtonPressed: () => placeholderCallbackForButtons(context),
             ),
-
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -38,7 +38,6 @@ class SignInPage extends StatelessWidget {
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-
                   const TextField(
                     decoration: InputDecoration(
                       labelText: 'Email',
@@ -46,9 +45,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-
                   const SizedBox(height: 12),
-
                   const TextField(
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -56,9 +53,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     obscureText: true,
                   ),
-
                   const SizedBox(height: 20),
-
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -66,7 +61,8 @@ class SignInPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4d2963),
                         foregroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 14),
@@ -77,7 +73,6 @@ class SignInPage extends StatelessWidget {
                 ],
               ),
             ),
-
             AppFooter(),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:union_shop/models/product.dart';
 import 'package:union_shop/about_page.dart';
 import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/sale_page.dart';
+import 'package:union_shop/sign_in_page.dart';
 import 'package:union_shop/app_footer.dart';
 import 'package:union_shop/collection_page.dart';
 
@@ -33,6 +34,7 @@ class UnionShopApp extends StatelessWidget {
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/collection': (context) => const CollectionPage(),
+        '/sign-in': (context) => const SignInPage(),
         '/sale': (context) => const SalePage(),
       },
     );
