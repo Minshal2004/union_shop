@@ -193,9 +193,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 48,
                       children: products
                           .map((p) => ProductCard(
-                                title: p.title,
-                                price: p.price,
-                                imageUrl: p.imageUrl,
+                                product: p,
                               ))
                           .toList(),
                     ),
@@ -226,15 +224,11 @@ class HomeScreen extends StatelessWidget {
 }
 
 class ProductCard extends StatefulWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+  final Product product;
 
   const ProductCard({
     super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
+    required this.product,
   });
 
   @override
@@ -269,13 +263,14 @@ class _ProductCardState extends State<ProductCard> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () => Navigator.pushNamed(context, '/product'),
+            onTap: () => Navigator.pushNamed(context, '/product',
+                arguments: widget.product),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Image.network(
-                    widget.imageUrl,
+                    widget.product.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
@@ -293,13 +288,13 @@ class _ProductCardState extends State<ProductCard> {
                   children: [
                     const SizedBox(height: 4),
                     Text(
-                      widget.title,
+                      widget.product.title,
                       style: const TextStyle(fontSize: 14, color: Colors.black),
                       maxLines: 2,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      widget.price,
+                      widget.product.price,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                   ],
