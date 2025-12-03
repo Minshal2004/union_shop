@@ -64,3 +64,6 @@ class CartService extends ChangeNotifier {
     return total;
   }
 }
+
+// Simple shared instance for convenience in pages that don't use DI/provider.
+final cartService = CartService();
