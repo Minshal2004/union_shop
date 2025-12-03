@@ -129,7 +129,7 @@ class AppHeader extends StatelessWidget {
                           message: 'View basket',
                           child: IconButton(
                             icon: const Icon(
-                              Icons.shopping_bag_outlined,
+                              Icons.shopping_cart,
                               size: 18,
                               color: Colors.grey,
                             ),
@@ -138,7 +138,8 @@ class AppHeader extends StatelessWidget {
                               minWidth: 32,
                               minHeight: 32,
                             ),
-                            onPressed: onButtonPressed,
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/cart'),
                           ),
                         ),
                         Tooltip(
