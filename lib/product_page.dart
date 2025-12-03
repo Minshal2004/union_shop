@@ -28,6 +28,9 @@ class ProductPage extends StatelessWidget {
     final Product? productFromArgs = args is Product ? args : null;
     final product = this.product ?? productFromArgs;
 
+    // The UI below uses product.title, product.imageUrl, product.price and
+    // product.description to render the page dynamically.
+
     if (product == null) {
       return Scaffold(
         appBar: AppBar(
