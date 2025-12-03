@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/app_footer.dart';
+import 'package:union_shop/models/collection.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
@@ -19,6 +20,10 @@ class CollectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Read Collection from route arguments (if provided)
+    final args = ModalRoute.of(context)?.settings.arguments;
+    final Collection? collection = args is Collection ? args : null;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,9 +39,9 @@ class CollectionPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Hoodies',
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                  Text(collection?.title ?? 'Collection',
+                      style: const TextStyle(
+                          fontSize: 28, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
 
                   // Sort By and Filter dropdowns (non-functional)
@@ -78,7 +83,7 @@ class CollectionPage extends StatelessWidget {
                       'A selection of official Union hoodies — available in a range of sizes and colours.',
                       style: TextStyle(fontSize: 16, height: 1.5)),
                   const SizedBox(height: 12),
-                  // Hoodies product grid (hardcoded sample products)
+                  // Products from the provided collection (or empty if none)
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -86,56 +91,35 @@ class CollectionPage extends StatelessWidget {
                         MediaQuery.of(context).size.width > 800 ? 4 : 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    children: [
-                      {
-                        'title': 'Classic Hoodie',
-                        'price': '£25.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Zip Hoodie',
-                        'price': '£28.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Pullover Hoodie',
-                        'price': '£22.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Cropped Hoodie',
-                        'price': '£20.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                    ]
+                    children: (collection?.products ?? [])
                         .map((p) => Card(
                               elevation: 2,
                               clipBehavior: Clip.hardEdge,
                               child: InkWell(
-                                onTap: () =>
-                                    placeholderCallbackForButtons(context),
+                                onTap: () => Navigator.pushNamed(
+                                    context, '/product',
+                                    arguments: p),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
-                                      child: Image.network(
-                                        p['image']!,
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Container(
-                                          color: Colors.grey[200],
-                                          child: const Center(
-                                              child: Icon(
-                                                  Icons.image_not_supported,
-                                                  color: Colors.grey)),
-                                        ),
-                                      ),
+                                      child: p.imageUrl.isNotEmpty
+                                          ? Image.network(
+                                              p.imageUrl,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  Container(
+                                                color: Colors.grey[200],
+                                                child: const Center(
+                                                    child: Icon(
+                                                        Icons
+                                                            .image_not_supported,
+                                                        color: Colors.grey)),
+                                              ),
+                                            )
+                                          : Container(color: Colors.grey[200]),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -143,12 +127,12 @@ class CollectionPage extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(p['title']!,
+                                          Text(p.title,
                                               style: const TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600)),
                                           const SizedBox(height: 6),
-                                          Text(p['price']!,
+                                          Text(p.price,
                                               style: const TextStyle(
                                                   fontSize: 13,
                                                   color: Colors.grey)),
