@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/app_footer.dart';
+import 'package:union_shop/data/mock_data.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
