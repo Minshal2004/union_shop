@@ -2,6 +2,7 @@
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/models/product.dart';
 
+/// Hardcoded sample data for development and testing.
 final List<Collection> sampleCollections = [
   Collection(
     id: 'c1',
@@ -59,6 +60,27 @@ final List<Collection> sampleCollections = [
         price: '£7.00',
         imageUrl: 'https://via.placeholder.com/600x400?text=Tote+Bag',
         description: 'Reusable cotton tote bag with union branding.',
+      ),
+      Product(
+        id: 'p6',
+        name: 'Union Beanie',
+        price: '£10.00',
+        imageUrl: 'https://via.placeholder.com/600x400?text=Beanie',
+        description: 'Warm knit beanie embroidered with a small union badge.',
+      ),
+    ],
+  ),
+  Collection(
+    id: 'c4',
+    title: 'Limited Editions',
+    imageUrl: 'https://via.placeholder.com/800x400?text=Limited+Editions',
+    products: [
+      Product(
+        id: 'p7',
+        name: 'Anniversary Mug',
+        price: '£8.00',
+        imageUrl: 'https://via.placeholder.com/600x400?text=Anniversary+Mug',
+        description: 'Collectible mug released for the union anniversary.',
       ),
     ],
   ),
