@@ -171,19 +171,41 @@ class HomeScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: () => navigateToProduct(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () => navigateToProduct(context),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4d2963),
+                                foregroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              child: const Text(
+                                'SHOP NOW',
+                                style:
+                                    TextStyle(fontSize: 14, letterSpacing: 1),
+                              ),
                             ),
-                          ),
-                          child: const Text(
-                            'SHOP NOW',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
+                            const SizedBox(width: 12),
+                            OutlinedButton(
+                              onPressed: () => Navigator.pushNamed(
+                                  context, '/personalisation'),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: const Color(0xFF4d2963),
+                                side:
+                                    const BorderSide(color: Color(0xFF4d2963)),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 12.0),
+                                child: Text('PERSONALISE',
+                                    style: TextStyle(letterSpacing: 1)),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
