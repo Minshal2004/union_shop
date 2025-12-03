@@ -4,7 +4,9 @@ import 'package:union_shop/models/product.dart';
 import 'package:union_shop/app_footer.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+  final Product? product;
+
+  const ProductPage({super.key, this.product});
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -20,9 +22,13 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use the product provided to the widget if present, otherwise read
+    // the product from the route arguments.
     final args = ModalRoute.of(context)?.settings.arguments;
+    final Product? productFromArgs = args is Product ? args : null;
+    final product = this.product ?? productFromArgs;
 
-    if (args is! Product) {
+    if (product == null) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Product'),
@@ -33,8 +39,6 @@ class ProductPage extends StatelessWidget {
         ),
       );
     }
-
-    final product = args;
 
     return Scaffold(
       body: SingleChildScrollView(
