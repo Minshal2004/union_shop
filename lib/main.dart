@@ -28,12 +28,8 @@ class UnionShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
       home: const HomeScreen(),
-      // By default, the app starts at the '/' route, which is the HomeScreen
-      initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
+      // Use the provided `home` widget as the initial page; no explicit initialRoute.
       routes: {
-        '/': (context) => const HomeScreen(),
         '/product': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           return args is Product
@@ -75,6 +71,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     // Sample product data — replace with real data source when available
     final products = <Product>[
       Product(
@@ -121,7 +119,7 @@ class HomeScreen extends StatelessWidget {
 
             // Hero Section
             SizedBox(
-              height: 400,
+              height: isMobile ? MediaQuery.of(context).size.height * 0.42 : 400,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -145,68 +143,104 @@ class HomeScreen extends StatelessWidget {
                   ),
                   // Content overlay
                   Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
+                    left: isMobile ? 16 : 24,
+                    right: isMobile ? 16 : 24,
+                    top: isMobile ? 36 : 80,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Union Shop – Official Students\' Union Store',
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: isMobile ? 20 : 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             height: 1.2,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 16),
-                        const Text(
+                        SizedBox(height: isMobile ? 12 : 16),
+                        Text(
                           "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: isMobile ? 14 : 20,
                             color: Colors.white,
-                            height: 1.5,
+                            height: 1.4,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 32),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () => navigateToProduct(context),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF4d2963),
-                                foregroundColor: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
-                                ),
+                        SizedBox(height: isMobile ? 20 : 32),
+                        // buttons: stack vertically on mobile for easier tapping
+                        isMobile
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () => navigateToProduct(context),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFF4d2963),
+                                      foregroundColor: Colors.white,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.zero),
+                                    ),
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 14.0),
+                                      child:
+                                          Text('SHOP NOW', style: TextStyle(letterSpacing: 1)),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  OutlinedButton(
+                                    onPressed: () =>
+                                        Navigator.pushNamed(context, '/personalisation'),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: const Color(0xFF4d2963),
+                                      side: const BorderSide(color: Color(0xFF4d2963)),
+                                    ),
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 14.0),
+                                      child: Text('PERSONALISE',
+                                          style: TextStyle(letterSpacing: 1)),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () => navigateToProduct(context),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFF4d2963),
+                                      foregroundColor: Colors.white,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero,
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'SHOP NOW',
+                                      style: TextStyle(fontSize: 14, letterSpacing: 1),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  OutlinedButton(
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, '/personalisation'),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: const Color(0xFF4d2963),
+                                      side: const BorderSide(color: Color(0xFF4d2963)),
+                                    ),
+                                    child: const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 12.0),
+                                      child: Text('PERSONALISE',
+                                          style: TextStyle(letterSpacing: 1)),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: const Text(
-                                'SHOP NOW',
-                                style:
-                                    TextStyle(fontSize: 14, letterSpacing: 1),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            OutlinedButton(
-                              onPressed: () => Navigator.pushNamed(
-                                  context, '/personalisation'),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: const Color(0xFF4d2963),
-                                side:
-                                    const BorderSide(color: Color(0xFF4d2963)),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 8.0, vertical: 12.0),
-                                child: Text('PERSONALISE',
-                                    style: TextStyle(letterSpacing: 1)),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -218,7 +252,7 @@ class HomeScreen extends StatelessWidget {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: EdgeInsets.all(isMobile ? 20.0 : 40.0),
                 child: Column(
                   children: [
                     const Text(
@@ -235,16 +269,22 @@ class HomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
-                    const SizedBox(height: 48),
+                    SizedBox(height: isMobile ? 24 : 48),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      children:
-                          products.map((p) => ProductCard(product: p)).toList(),
+                      crossAxisCount: isMobile ? 1 : 2,
+                      crossAxisSpacing: isMobile ? 12 : 24,
+                      mainAxisSpacing: isMobile ? 24 : 48,
+                      childAspectRatio: isMobile ? 1.6 : 1.4,
+                      children: products
+                          .map((p) => Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: isMobile ? 12.0 : 48.0,
+                                    right: isMobile ? 0 : 0),
+                                child: ProductCard(product: p),
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),
@@ -277,6 +317,8 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() => _hovering = false),
@@ -284,28 +326,22 @@ class _ProductCardState extends State<ProductCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         curve: Curves.easeOut,
-        transform: _hovering
-            ? (Matrix4.identity()..translate(0, -6, 0))
-            : Matrix4.identity(),
-        decoration: BoxDecoration(
-          boxShadow: _hovering
-              ? [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.12),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6))
-                ]
-              : null,
-        ),
-        child: Material(
-          color: Colors.transparent,
+        transform: (!_hovering || isMobile)
+            ? Matrix4.identity()
+            : (Matrix4.identity()..translate(0, -6, 0)),
+        child: Card(
+          margin: EdgeInsets.zero,
+          clipBehavior: Clip.hardEdge,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          elevation: _hovering && !isMobile ? 6 : 2,
           child: InkWell(
             onTap: () => Navigator.pushNamed(context, '/product',
                 arguments: widget.product),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                AspectRatio(
+                  aspectRatio: isMobile ? 1.6 : 1.8,
                   child: Image.network(
                     widget.product.imageUrl,
                     fit: BoxFit.cover,
@@ -321,22 +357,25 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 4),
                       Text(
                         widget.product.title,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: isMobile ? 14 : 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600),
                         maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 6),
                       Text(
                         widget.product.price,
-                        style:
-                            const TextStyle(fontSize: 13, color: Colors.grey),
+                        style: TextStyle(
+                            fontSize: isMobile ? 13 : 14,
+                            color: Colors.grey[700]),
                       ),
                     ],
                   ),
