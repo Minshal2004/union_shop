@@ -76,7 +76,7 @@ class CollectionsPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  // Hoodies product grid (hardcoded sample products)
+                  // Featured collections grid (uses Collection model)
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -84,33 +84,9 @@ class CollectionsPage extends StatelessWidget {
                         MediaQuery.of(context).size.width > 800 ? 4 : 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    children: [
-                      {
-                        'title': 'Classic Hoodie',
-                        'price': '£25.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Zip Hoodie',
-                        'price': '£28.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Pullover Hoodie',
-                        'price': '£22.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                      {
-                        'title': 'Cropped Hoodie',
-                        'price': '£20.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg'
-                      },
-                    ]
-                        .map((p) => Card(
+                    children: collections
+                        .take(4)
+                        .map((c) => Card(
                               elevation: 2,
                               clipBehavior: Clip.hardEdge,
                               child: InkWell(
@@ -120,21 +96,23 @@ class CollectionsPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
-                                      child: Image.network(
-                                        p['image']!,
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Container(
-                                          color: Colors.grey[200],
-                                          child: const Center(
-                                            child: Icon(
-                                                Icons.image_not_supported,
-                                                color: Colors.grey),
-                                          ),
-                                        ),
-                                      ),
+                                      child: c.imageUrl.isNotEmpty
+                                          ? Image.network(
+                                              c.imageUrl,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  Container(
+                                                color: Colors.grey[200],
+                                                child: const Center(
+                                                  child: Icon(
+                                                      Icons.image_not_supported,
+                                                      color: Colors.grey),
+                                                ),
+                                              ),
+                                            )
+                                          : Container(color: Colors.grey[200]),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -142,12 +120,12 @@ class CollectionsPage extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(p['title']!,
+                                          Text(c.title,
                                               style: const TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600)),
                                           const SizedBox(height: 6),
-                                          Text(p['price']!,
+                                          Text('${c.products.length} items',
                                               style: const TextStyle(
                                                   fontSize: 13,
                                                   color: Colors.grey)),
