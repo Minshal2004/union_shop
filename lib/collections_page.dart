@@ -157,10 +157,9 @@ class CollectionsPage extends StatelessWidget {
                         elevation: 2,
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/collection',
-                                arguments: c);
-                          },
+                          onTap: () => Navigator.pushNamed(
+                              context, '/collection',
+                              arguments: c),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
