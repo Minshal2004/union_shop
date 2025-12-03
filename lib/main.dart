@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           child: const Text(
-                            'BROWSE PRODUCTS',
+                            'SHOP NOW',
                             style: TextStyle(fontSize: 14, letterSpacing: 1),
                           ),
                         ),
@@ -215,9 +215,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 48,
                       children: products
-                          .map((p) => ProductCard(
-                                product: p,
-                              ))
+                          .map((p) => ProductCard(product: p))
                           .toList(),
                     ),
                   ],
@@ -294,21 +292,24 @@ class _ProductCardState extends State<ProductCard> {
                     },
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 4),
-                    Text(
-                      widget.product.title,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      widget.product.price,
-                      style: const TextStyle(fontSize: 13, color: Colors.grey),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.product.title,
+                        style: const TextStyle(fontSize: 14, color: Colors.black),
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.product.price,
+                        style: const TextStyle(fontSize: 13, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
