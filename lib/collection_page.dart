@@ -83,6 +83,7 @@ class CollectionPage extends StatelessWidget {
                   Text('${products.length} items',
                       style: const TextStyle(fontSize: 16, color: Colors.grey)),
                   const SizedBox(height: 12),
+
                   // Products from the provided collection (or a friendly fallback)
                   if (products.isEmpty)
                     Container(

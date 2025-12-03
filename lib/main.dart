@@ -31,6 +31,7 @@ class UnionShopApp extends StatelessWidget {
       // When navigating to '/product', build and return the ProductPage
       // In your browser, try this link: http://localhost:49856/#/product
       routes: {
+        '/': (context) => const HomeScreen(),
         '/product': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           return args is Product
