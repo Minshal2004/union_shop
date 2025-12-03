@@ -1,42 +1,47 @@
 /// Product model used across the app.
 ///
 /// Fields:
-/// - title: display name for the product
+/// - id: unique identifier for the product
+/// - name: display name for the product
 /// - price: formatted price string (e.g. "£10.00")
 /// - imageUrl: image location (network/local)
 /// - description: long-form product description
 
 class Product {
-  final String title;
+  final String id;
+  final String name;
   final String price;
   final String imageUrl;
   final String description;
 
-  const Product({
-    required this.title,
+  Product({
+    required this.id,
+    required this.name,
     required this.price,
     required this.imageUrl,
-    this.description = '',
+    required this.description,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
+  // Backwards-compatible getter for code that expects `title`.
+  String get title => name;
+
+  factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      title: json['title'] as String? ?? '',
-      price: json['price'] as String? ?? '',
-      imageUrl: json['imageUrl'] as String? ?? '',
-      description: json['description'] as String? ?? '',
+      id: map['id']?.toString() ?? '',
+      name: map['name'] ?? '',
+      price: map['price']?.toString() ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      description: map['description'] ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'title': title,
+      'id': id,
+      'name': name,
       'price': price,
       'imageUrl': imageUrl,
       'description': description,
     };
   }
-
-  @override
-  String toString() => 'Product(title: $title, price: $price)';
 }
