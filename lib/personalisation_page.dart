@@ -19,6 +19,15 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   final List<String> _mugColors = ['White', 'Black', 'Blue'];
 
   @override
+  void initState() {
+    super.initState();
+    // Update the UI whenever the custom text changes so the preview is live.
+    _customTextController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   void dispose() {
     _customTextController.dispose();
     super.dispose();
