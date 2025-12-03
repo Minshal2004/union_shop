@@ -22,8 +22,8 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use the product provided to the widget if present, otherwise read
-    // the product from the route arguments.
+    // Prefer a Product passed to the widget; otherwise read from the
+    // current route's settings.arguments so navigation can pass a Product.
     final args = ModalRoute.of(context)?.settings.arguments;
     final Product? productFromArgs = args is Product ? args : null;
     final product = this.product ?? productFromArgs;
