@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/app_header.dart';
 import 'package:union_shop/app_footer.dart';
-import 'package:union_shop/data/mock_data.dart';
+import 'package:union_shop/data/sample_data.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -20,28 +20,8 @@ class CollectionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final collections = <Map<String, String>>[
-      {
-        'title': 'Hoodies',
-        'imageUrl': 'https://shop.upsu.net/cdn/shop/files/hoodie_1024.jpg',
-        'description': 'Comfortable branded hoodies in various sizes.'
-      },
-      {
-        'title': 'T‑Shirts',
-        'imageUrl': 'https://shop.upsu.net/cdn/shop/files/tshirt_1024.jpg',
-        'description': 'Casual tees — perfect for everyday wear.'
-      },
-      {
-        'title': 'Accessories',
-        'imageUrl': 'https://shop.upsu.net/cdn/shop/files/accessories_1024.jpg',
-        'description': 'Bags, hats, stationery and campus essentials.'
-      },
-      {
-        'title': 'Gifts',
-        'imageUrl': 'https://shop.upsu.net/cdn/shop/files/gifts_1024.jpg',
-        'description': 'Souvenirs and gift ideas for friends and family.'
-      },
-    ];
+    // Use the shared sample collections data for rendering
+    final collections = sampleCollections;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -199,8 +179,7 @@ class CollectionsPage extends StatelessWidget {
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
                           onTap: () {
-                            final title = c['title'] ?? '';
-                            if (title == 'Hoodies') {
+                            if (c.title == 'Hoodies') {
                               Navigator.pushNamed(context, '/collection');
                             } else {
                               placeholderCallbackForButtons(context);
@@ -210,10 +189,9 @@ class CollectionsPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: c['imageUrl'] != null &&
-                                        c['imageUrl']!.isNotEmpty
+                                child: c.imageUrl.isNotEmpty
                                     ? Image.network(
-                                        c['imageUrl']!,
+                                        c.imageUrl,
                                         fit: BoxFit.cover,
                                         width: double.infinity,
                                         errorBuilder:
@@ -233,12 +211,12 @@ class CollectionsPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(c['title'] ?? '',
+                                    Text(c.title,
                                         style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600)),
                                     const SizedBox(height: 6),
-                                    Text(c['description'] ?? '',
+                                    Text('${c.products.length} items',
                                         style: const TextStyle(
                                             fontSize: 13, color: Colors.grey)),
                                   ],
