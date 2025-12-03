@@ -214,9 +214,8 @@ class HomeScreen extends StatelessWidget {
                           MediaQuery.of(context).size.width > 600 ? 2 : 1,
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 48,
-                      children: products
-                          .map((p) => ProductCard(product: p))
-                          .toList(),
+                      children:
+                          products.map((p) => ProductCard(product: p)).toList(),
                     ),
                   ],
                 ),
@@ -300,13 +299,15 @@ class _ProductCardState extends State<ProductCard> {
                       const SizedBox(height: 4),
                       Text(
                         widget.product.title,
-                        style: const TextStyle(fontSize: 14, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.black),
                         maxLines: 2,
                       ),
                       const SizedBox(height: 4),
                       Text(
                         widget.product.price,
-                        style: const TextStyle(fontSize: 13, color: Colors.grey),
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.grey),
                       ),
                     ],
                   ),
