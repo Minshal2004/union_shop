@@ -23,6 +23,7 @@ class CollectionPage extends StatelessWidget {
     // Read Collection from route arguments (if provided)
     final args = ModalRoute.of(context)?.settings.arguments;
     final Collection? collection = args is Collection ? args : null;
+    final products = collection?.products ?? [];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -79,72 +80,82 @@ class CollectionPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 12),
-                  const Text(
-                      'A selection of official Union hoodies — available in a range of sizes and colours.',
-                      style: TextStyle(fontSize: 16, height: 1.5)),
+                  Text('${products.length} items',
+                      style: const TextStyle(fontSize: 16, color: Colors.grey)),
                   const SizedBox(height: 12),
-                  // Products from the provided collection (or empty if none)
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 4 : 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    children: (collection?.products ?? [])
-                        .map((p) => Card(
-                              elevation: 2,
-                              clipBehavior: Clip.hardEdge,
-                              child: InkWell(
-                                onTap: () => Navigator.pushNamed(
-                                    context, '/product',
-                                    arguments: p),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: p.imageUrl.isNotEmpty
-                                          ? Image.network(
-                                              p.imageUrl,
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              errorBuilder: (context, error,
-                                                      stackTrace) =>
-                                                  Container(
-                                                color: Colors.grey[200],
-                                                child: const Center(
-                                                    child: Icon(
-                                                        Icons
-                                                            .image_not_supported,
-                                                        color: Colors.grey)),
-                                              ),
-                                            )
-                                          : Container(color: Colors.grey[200]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(p.title,
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600)),
-                                          const SizedBox(height: 6),
-                                          Text(p.price,
-                                              style: const TextStyle(
-                                                  fontSize: 13,
-                                                  color: Colors.grey)),
-                                        ],
+                  // Products from the provided collection (or a friendly fallback)
+                  if (products.isEmpty)
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      alignment: Alignment.center,
+                      child: const Text('No products in this collection',
+                          style: TextStyle(fontSize: 16, color: Colors.grey)),
+                    )
+                  else
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 800 ? 4 : 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      children: products
+                          .map((p) => Card(
+                                elevation: 2,
+                                clipBehavior: Clip.hardEdge,
+                                child: InkWell(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, '/product',
+                                      arguments: p),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: p.imageUrl.isNotEmpty
+                                            ? Image.network(
+                                                p.imageUrl,
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    Container(
+                                                  color: Colors.grey[200],
+                                                  child: const Center(
+                                                      child: Icon(
+                                                          Icons
+                                                              .image_not_supported,
+                                                          color: Colors.grey)),
+                                                ),
+                                              )
+                                            : Container(
+                                                color: Colors.grey[200]),
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(p.title,
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                            const SizedBox(height: 6),
+                                            Text(p.price,
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.grey)),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ))
-                        .toList(),
-                  ),
+                              ))
+                          .toList(),
+                    ),
                   const SizedBox(height: 12),
                 ],
               ),
