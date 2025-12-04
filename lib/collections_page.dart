@@ -102,8 +102,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  // Sort and filter controls (non-functional placeholders)
-                  Row(
+                  // Sort and filter controls — wrap on small screens so they stack
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       DropdownButton<String>(
                         value: _sortValue,
@@ -119,7 +122,6 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         ],
                         onChanged: _onSortChanged,
                       ),
-                      const SizedBox(width: 16),
                       DropdownButton<String>(
                         value: _categoryValue,
                         items: const [
