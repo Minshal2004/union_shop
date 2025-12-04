@@ -311,7 +311,7 @@ class HomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
-                    SizedBox(height: isMobile ? 24 : 48),
+                    SizedBox(height: isMobile ? 32 : 64),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
