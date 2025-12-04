@@ -39,11 +39,13 @@ class _ProductPageState extends State<ProductPage> {
   int _quantity = 1;
   // Main image URL shown in the large image area; thumbnails may replace it
   late String _mainImageUrl;
-  final List<String> _exampleImages = [
-    'https://shop.upsu.net/media/catalog/product/h/o/hoodie_charcoal.jpg',
-    'https://shop.upsu.net/media/catalog/product/t/s/tshirt_white.jpg',
-    'https://shop.upsu.net/media/catalog/product/t/r/trousers_grey.jpg',
-  ];
+  // Hardcoded clothing images (public placeholders / store images)
+  static const hoodieImage = 'https://shop.upsu.net/media/catalog/product/h/o/hoodie_charcoal.jpg';
+  static const sweatshirtImage = 'https://images.unsplash.com/photo-1520975914686-9c3f1b6f59b5?auto=format&fit=crop&w=800&q=60';
+  static const tshirtImage = 'https://shop.upsu.net/media/catalog/product/t/s/tshirt_white.jpg';
+  static const trousersImage = 'https://shop.upsu.net/media/catalog/product/t/r/trousers_grey.jpg';
+
+  final List<String> _exampleImages = [hoodieImage, sweatshirtImage, tshirtImage, trousersImage];
 
   @override
   void didChangeDependencies() {
@@ -52,10 +54,23 @@ class _ProductPageState extends State<ProductPage> {
       final args = ModalRoute.of(context)?.settings.arguments;
       final Product? productFromArgs = args is Product ? args : null;
       _product = widget.product ?? productFromArgs;
-      // initialize the main image from the product or fallback to example
-      _mainImageUrl = (_product?.imageUrl?.isNotEmpty ?? false)
-          ? _product!.imageUrl
-          : _exampleImages.first;
+      // initialize the main image from the product or pick a fallback based on title
+      if ((_product?.imageUrl?.isNotEmpty ?? false)) {
+        _mainImageUrl = _product!.imageUrl;
+      } else {
+        final title = (_product?.title ?? '').toLowerCase();
+        if (title.contains('hoodie')) {
+          _mainImageUrl = hoodieImage;
+        } else if (title.contains('sweat') || title.contains('sweatshirt')) {
+          _mainImageUrl = sweatshirtImage;
+        } else if (title.contains('t-shirt') || title.contains('tshirt') || title.contains('tee')) {
+          _mainImageUrl = tshirtImage;
+        } else if (title.contains('trouser') || title.contains('jogger') || title.contains('chino')) {
+          _mainImageUrl = trousersImage;
+        } else {
+          _mainImageUrl = _exampleImages.first;
+        }
+      }
       _productInitialized = true;
     }
   }
@@ -104,43 +119,45 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                // Thumbnails
+                // Thumbnails (product image first if present, then example images)
                 SizedBox(
                   height: 72,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      // product image first, then example images
-                      ...[product.imageUrl, ..._exampleImages]
-                          .where((u) => u != null)
-                          .map((u) => u.toString())
-                          .toSet()
-                          .map((img) => Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: InkWell(
-                                  onTap: () => setState(() => _mainImageUrl = img),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(6),
-                                    child: AspectRatio(
-                                      aspectRatio: 1,
-                                      child: Image.network(
-                                        img,
-                                        fit: BoxFit.cover,
-                                        width: 72,
-                                        height: 72,
-                                        errorBuilder: (_, __, ___) => Container(
-                                          color: Colors.grey[200],
-                                          width: 72,
-                                          height: 72,
-                                        ),
-                                      ),
-                                    ),
+                  child: Builder(builder: (context) {
+                    final thumbs = <String>[];
+                    if (_product?.imageUrl != null && _product!.imageUrl.isNotEmpty) {
+                      thumbs.add(_product!.imageUrl);
+                    }
+                    thumbs.addAll(_exampleImages);
+
+                    final thumbWidgets = thumbs.toSet().map((img) => Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: InkWell(
+                            onTap: () => setState(() => _mainImageUrl = img),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: Image.network(
+                                  img,
+                                  fit: BoxFit.cover,
+                                  width: 72,
+                                  height: 72,
+                                  errorBuilder: (_, __, ___) => Container(
+                                    color: Colors.grey[200],
+                                    width: 72,
+                                    height: 72,
                                   ),
                                 ),
-                              ))
-                          .toList(),
-                    ],
-                  ),
+                              ),
+                            ),
+                          ),
+                        )).toList();
+
+                    return ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: thumbWidgets,
+                    );
+                  }),
                 ),
               ],
             );
