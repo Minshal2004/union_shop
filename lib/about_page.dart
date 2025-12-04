@@ -20,6 +20,12 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 600;
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Responsive max width: full width on small screens, 90% on medium,
+    // and capped width on large screens for comfortable reading line-length.
+    final maxContentWidth = screenWidth < 600
+        ? double.infinity
+        : (screenWidth < 1000 ? screenWidth * 0.9 : 900.0);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -35,7 +41,7 @@ class AboutPage extends StatelessWidget {
               child: Center(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxWidth: isMobile ? double.infinity : 900,
+                    maxWidth: maxContentWidth,
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 24, vertical: 32),
