@@ -43,25 +43,44 @@ class AppFooter extends StatelessWidget {
 
           if (isNarrow) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                section('Customer Service', [
-                  'Contact us: info@upsu.net',
-                  'Returns & refunds',
-                  'FAQ',
-                ]),
-                const SizedBox(height: 20),
-                section('Information', [
-                  'About the Union Shop',
-                  'Delivery & collection',
-                  'Terms & conditions',
-                ]),
-                const SizedBox(height: 20),
-                section('Social Media', [
-                  'Twitter: @UniUnion',
-                  'Facebook: /UnionShop',
-                  'Instagram: @unionshop',
-                ]),
+                // Customer Service (full width)
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: section('Customer Service', [
+                    'Contact us: info@upsu.net',
+                    'Returns & refunds',
+                    'FAQ',
+                  ]),
+                ),
+                Divider(color: Colors.grey[300]),
+                const SizedBox(height: 12),
+
+                // Information
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: section('Information', [
+                    'About the Union Shop',
+                    'Delivery & collection',
+                    'Terms & conditions',
+                  ]),
+                ),
+                Divider(color: Colors.grey[300]),
+                const SizedBox(height: 12),
+
+                // Social Media
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(top: 12),
+                  child: section('Social Media', [
+                    'Twitter: @UniUnion',
+                    'Facebook: /UnionShop',
+                    'Instagram: @unionshop',
+                  ]),
+                ),
               ],
             );
           }
