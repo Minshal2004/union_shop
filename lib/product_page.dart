@@ -25,13 +25,25 @@ class _ProductPageState extends State<ProductPage> {
     ));
   }
 
+  // Hold the currently displayed product in state so it can be reused/updated.
+  Product? _product;
+  bool _productInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_productInitialized) {
+      final args = ModalRoute.of(context)?.settings.arguments;
+      final Product? productFromArgs = args is Product ? args : null;
+      _product = widget.product ?? productFromArgs;
+      _productInitialized = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Prefer a Product passed to the widget; otherwise read from the
-    // current route's settings.arguments so navigation can pass a Product.
-    final args = ModalRoute.of(context)?.settings.arguments;
-    final Product? productFromArgs = args is Product ? args : null;
-    final product = widget.product ?? productFromArgs;
+    // Use the product stored in state (initialized from widget or route args)
+    final product = _product;
 
     // The UI below uses product.title, product.imageUrl, product.price and
     // product.description to render the page dynamically.
