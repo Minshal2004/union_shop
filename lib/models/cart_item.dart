@@ -1,34 +1,33 @@
-// ...new file...
 import 'package:union_shop/models/product.dart';
 
 /// Simple CartItem used for holding a Product and a quantity in a cart.
 class CartItem {
   final Product product;
-  final int quantity;
+  int quantity;
+  String? selectedOption;
 
-  CartItem({required this.product, this.quantity = 1});
+  CartItem({
+    required this.product,
+    this.quantity = 1,
+    this.selectedOption,
+  });
 
-  CartItem copyWith({Product? product, int? quantity}) {
-    return CartItem(
-      product: product ?? this.product,
-      quantity: quantity ?? this.quantity,
-    );
+  double get unitPrice {
+    final cleaned = (product.price ?? '').replaceAll(RegExp('[^0-9\.]'), '');
+    return double.tryParse(cleaned) ?? 0.0;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'product': product.toMap(),
-      'quantity': quantity,
-    };
-  }
+  double get totalPrice => unitPrice * quantity;
 
-  factory CartItem.fromMap(Map<String, dynamic> map) {
-    return CartItem(
-      product:
-          Product.fromMap(Map<String, dynamic>.from(map['product'] as Map)),
-      quantity: (map['quantity'] is int)
-          ? map['quantity'] as int
-          : int.tryParse(map['quantity']?.toString() ?? '') ?? 1,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        'product': product.toJson(),
+        'quantity': quantity,
+        'selectedOption': selectedOption,
+      };
+
+  factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
+        product: Product.fromJson(json['product'] ?? {}),
+        quantity: (json['quantity'] ?? 1) as int,
+        selectedOption: json['selectedOption'] as String?,
+      );
 }
