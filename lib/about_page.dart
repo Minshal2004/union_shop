@@ -38,7 +38,7 @@ class AboutPage extends StatelessWidget {
                     maxWidth: isMobile ? double.infinity : 900,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24, vertical: 32),
+                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 24, vertical: 32),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
