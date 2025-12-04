@@ -76,7 +76,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
     // Use the shared sample collections data for rendering
     final collections = _collections;
     final screenWidth = MediaQuery.of(context).size.width;
-    final gridColumns = screenWidth < 600 ? 2 : 4;
+    final isMobile = screenWidth < 600;
+    final gridColumns = isMobile ? 2 : 4;
     // pagination calculations
     final totalPages = (collections.length + _pageSize - 1) ~/ _pageSize;
     final startIndex = _currentPage * _pageSize;
@@ -154,16 +155,19 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                     arguments: c),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Expanded(
+                                    // fixed aspect image to avoid layout overflow
+                                    AspectRatio(
+                                      aspectRatio: isMobile ? 1.2 : 1.3,
                                       child: c.imageUrl.isNotEmpty
                                           ? Image.network(
                                               c.imageUrl,
                                               fit: BoxFit.cover,
                                               width: double.infinity,
-                                              errorBuilder: (context, error,
-                                                      stackTrace) =>
-                                                  Container(
+                                              errorBuilder:
+                                                  (context, error, stackTrace) =>
+                                                      Container(
                                                 color: Colors.grey[200],
                                                 child: const Center(
                                                   child: Icon(
@@ -179,11 +183,16 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(c.title,
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600)),
+                                          Text(
+                                            c.title,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                           const SizedBox(height: 6),
                                           Text('${c.products.length} items',
                                               style: const TextStyle(
@@ -220,8 +229,10 @@ class _CollectionsPageState extends State<CollectionsPage> {
                               arguments: c),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Expanded(
+                              AspectRatio(
+                                aspectRatio: isMobile ? 1.2 : 1.3,
                                 child: c.imageUrl.isNotEmpty
                                     ? Image.network(
                                         c.imageUrl,
@@ -243,10 +254,15 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(c.title,
-                                        style: const TextStyle(
-                                            fontSize: 14, fontWeight: FontWeight.w600)),
+                                    Text(
+                                      c.title,
+                                      style: const TextStyle(
+                                          fontSize: 14, fontWeight: FontWeight.w600),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                     const SizedBox(height: 6),
                                     Text('${c.products.length} items',
                                         style: const TextStyle(

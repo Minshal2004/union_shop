@@ -215,44 +215,54 @@ class _CollectionPageState extends State<CollectionPage> {
                         crossAxisCount: columns,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
-                        children: pageProducts.map((p) => Card(
-                          elevation: 2,
-                          clipBehavior: Clip.hardEdge,
-                          child: InkWell(
-                            onTap: () => Navigator.pushNamed(context, '/product', arguments: p),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: p.imageUrl.isNotEmpty
-                                      ? Image.network(
-                                          p.imageUrl,
-                                          fit: BoxFit.cover,
-                                          width: double.infinity,
-                                          errorBuilder: (context, error, stackTrace) => Container(
-                                            color: Colors.grey[200],
-                                            child: const Center(
-                                              child: Icon(Icons.image_not_supported, color: Colors.grey),
+                        children: pageProducts.map((p) {
+                          return Card(
+                            elevation: 2,
+                            clipBehavior: Clip.hardEdge,
+                            child: InkWell(
+                              onTap: () => Navigator.pushNamed(context, '/product', arguments: p),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: isMobile ? 1.2 : 1.3,
+                                    child: p.imageUrl.isNotEmpty
+                                        ? Image.network(
+                                            p.imageUrl,
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            errorBuilder: (context, error, stackTrace) => Container(
+                                              color: Colors.grey[200],
+                                              child: const Center(
+                                                child: Icon(Icons.image_not_supported, color: Colors.grey),
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      : Container(color: Colors.grey[200]),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(p.title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                                      const SizedBox(height: 6),
-                                      Text(p.price, style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                                    ],
+                                          )
+                                        : Container(color: Colors.grey[200]),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          p.title,
+                                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Text(p.price, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )).toList(),
+                          );
+                        }).toList(),
                       ),
 
                     const SizedBox(height: 12),
