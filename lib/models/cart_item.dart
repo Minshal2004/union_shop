@@ -17,5 +17,5 @@ class CartItem {
 
   double get totalPrice => unitPrice * quantity;
 
-  // No serialization — store Product directly
+  // CartItem stores Product objects directly; no toJson/fromJson serialization is used.
 }
