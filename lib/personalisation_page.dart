@@ -72,7 +72,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DropdownButtonFormField<String>(
-                value: _selectedItem,
+                initialValue: _selectedItem,
                 decoration: const InputDecoration(labelText: 'Item type'),
                 items: _itemTypes
                     .map((t) => DropdownMenuItem(value: t, child: Text(t)))
@@ -100,7 +100,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
               // Conditional helper/options depending on selected item
               if (_selectedItem == 'T‑Shirt' || _selectedItem == 'Hoodie')
                 DropdownButtonFormField<String>(
-                  value: _selectedSize,
+                  initialValue: _selectedSize,
                   decoration: const InputDecoration(labelText: 'Size'),
                   items: _sizes
                       .map((s) => DropdownMenuItem(value: s, child: Text(s)))
@@ -112,7 +112,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
 
               if (_selectedItem == 'Mug')
                 DropdownButtonFormField<String>(
-                  value: _selectedMugColor,
+                  initialValue: _selectedMugColor,
                   decoration: const InputDecoration(labelText: 'Mug color'),
                   items: _mugColors
                       .map((c) => DropdownMenuItem(value: c, child: Text(c)))
