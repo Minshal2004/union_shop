@@ -27,6 +27,8 @@ class _CollectionPageState extends State<CollectionPage> {
   // filter/sort/paginate locally.
   Collection? _collection;
   late List _visibleProducts;
+  // Keep an original snapshot so we can restore "Relevance" ordering
+  late List _originalProducts;
   bool _productsInitialized = false;
 
   @override
@@ -36,8 +38,52 @@ class _CollectionPageState extends State<CollectionPage> {
       final args = ModalRoute.of(context)?.settings.arguments;
       _collection = args is Collection ? args : null;
       _visibleProducts = List.from(_collection?.products ?? []);
+      // save original order for "Relevance"
+      _originalProducts = List.from(_visibleProducts);
       _productsInitialized = true;
     }
+  }
+
+  // Sort state and handler
+  String _sortValue = 'Relevance';
+
+  void _onSortChanged(String? value) {
+    if (value == null) return;
+    setState(() {
+      _sortValue = value;
+      if (_sortValue == 'Relevance') {
+        // restore original order
+        _visibleProducts = List.from(_originalProducts);
+        return;
+      }
+
+      if (_sortValue == 'Title') {
+        _visibleProducts.sort((a, b) =>
+            (a.title ?? '').toString().toLowerCase()
+                .compareTo((b.title ?? '').toString().toLowerCase()));
+        return;
+      }
+
+      // price-based sorting: try to parse numeric value from price string
+      double parsePrice(String p) {
+        final cleaned = p.replaceAll(RegExp('[^0-9\.]'), '');
+        return double.tryParse(cleaned) ?? 0.0;
+      }
+
+      if (_sortValue == 'PriceLow') {
+        _visibleProducts.sort((a, b) =>
+            parsePrice((a.price ?? '').toString()).compareTo(
+                parsePrice((b.price ?? '').toString())));
+        return;
+      }
+
+      if (_sortValue == 'PriceHigh') {
+        _visibleProducts.sort((a, b) =>
+            parsePrice((b.price ?? '').toString()).compareTo(
+                parsePrice((a.price ?? '').toString())));
+        return;
+      }
+    });
   }
 
   @override
@@ -67,34 +113,30 @@ class _CollectionPageState extends State<CollectionPage> {
                           fontSize: 28, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
 
-                  // Sort By and Filter dropdowns (non-functional)
+                  // Sort By and Filter dropdowns
                   Row(
                     children: [
                       DropdownButton<String>(
-                        value: 'Relevance',
+                        value: _sortValue,
                         items: const [
                           DropdownMenuItem(
                               value: 'Relevance', child: Text('Relevance')),
+                          DropdownMenuItem(value: 'Title', child: Text('Title')),
                           DropdownMenuItem(
-                              value: 'PriceLow',
-                              child: Text('Price: Low to High')),
+                              value: 'PriceLow', child: Text('Price: Low to High')),
                           DropdownMenuItem(
-                              value: 'PriceHigh',
-                              child: Text('Price: High to Low')),
+                              value: 'PriceHigh', child: Text('Price: High to Low')),
                         ],
-                        onChanged: (_) {},
+                        onChanged: _onSortChanged,
                       ),
                       const SizedBox(width: 16),
                       DropdownButton<String>(
                         value: 'All',
                         items: const [
                           DropdownMenuItem(value: 'All', child: Text('All')),
-                          DropdownMenuItem(
-                              value: 'Small', child: Text('Small')),
-                          DropdownMenuItem(
-                              value: 'Medium', child: Text('Medium')),
-                          DropdownMenuItem(
-                              value: 'Large', child: Text('Large')),
+                          DropdownMenuItem(value: 'Small', child: Text('Small')),
+                          DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                          DropdownMenuItem(value: 'Large', child: Text('Large')),
                         ],
                         onChanged: (_) {},
                       ),
