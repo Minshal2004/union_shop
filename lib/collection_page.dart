@@ -144,148 +144,121 @@ class _CollectionPageState extends State<CollectionPage> {
               color: Colors.white,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(collection?.title ?? 'Collection',
-                      style: const TextStyle(
-                          fontSize: 28, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 12),
+              child: Builder(builder: (context) {
+                final isMobile = MediaQuery.of(context).size.width < 600;
+                final columns = isMobile ? 2 : 4;
 
-                  // Sort By and Filter dropdowns
-                  Row(
-                    children: [
-                      DropdownButton<String>(
-                        value: _sortValue,
-                        items: const [
-                          DropdownMenuItem(
-                              value: 'Relevance', child: Text('Relevance')),
-                          DropdownMenuItem(value: 'Title', child: Text('Title')),
-                          DropdownMenuItem(
-                              value: 'PriceLow', child: Text('Price: Low to High')),
-                          DropdownMenuItem(
-                              value: 'PriceHigh', child: Text('Price: High to Low')),
-                        ],
-                        onChanged: _onSortChanged,
-                      ),
-                      const SizedBox(width: 16),
-                      DropdownButton<String>(
-                        value: _sizeFilter,
-                        items: const [
-                          DropdownMenuItem(value: 'All', child: Text('All')),
-                          DropdownMenuItem(value: 'Small', child: Text('Small')),
-                          DropdownMenuItem(value: 'Medium', child: Text('Medium')),
-                          DropdownMenuItem(value: 'Large', child: Text('Large')),
-                        ],
-                        onChanged: _onFilterChanged,
-                      ),
-                    ],
-                  ),
+                if (collection == null) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 48.0),
+                      child: Text('Collection not found',
+                          style: TextStyle(fontSize: 18, color: Colors.grey[700])),
+                    ),
+                  );
+                }
 
-                  const SizedBox(height: 12),
-                  Text('${products.length} items',
-                      style: const TextStyle(fontSize: 16, color: Colors.grey)),
-                  const SizedBox(height: 12),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(collection!.title,
+                        style: const TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 12),
 
-                  // Products from the provided collection (or a friendly fallback)
-                  if (pageProducts.isEmpty)
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      alignment: Alignment.center,
-                      child: const Text('No products in this collection',
-                          style: TextStyle(fontSize: 16, color: Colors.grey)),
-                    )
-                  else
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 800 ? 4 : 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      children: pageProducts
-                          .map((p) => Card(
-                                elevation: 2,
-                                clipBehavior: Clip.hardEdge,
-                                child: InkWell(
-                                  onTap: () => Navigator.pushNamed(
-                                      context, '/product',
-                                      arguments: p),
+                    // controls remain wired to existing handlers
+                    Row(
+                      children: [
+                        DropdownButton<String>(
+                          value: _sortValue,
+                          items: const [
+                            DropdownMenuItem(
+                                value: 'Relevance', child: Text('Relevance')),
+                            DropdownMenuItem(value: 'Title', child: Text('Title')),
+                            DropdownMenuItem(
+                                value: 'PriceLow', child: Text('Price: Low to High')),
+                            DropdownMenuItem(
+                                value: 'PriceHigh', child: Text('Price: High to Low')),
+                          ],
+                          onChanged: _onSortChanged,
+                        ),
+                        const SizedBox(width: 16),
+                        DropdownButton<String>(
+                          value: _sizeFilter,
+                          items: const [
+                            DropdownMenuItem(value: 'All', child: Text('All')),
+                            DropdownMenuItem(value: 'Small', child: Text('Small')),
+                            DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                            DropdownMenuItem(value: 'Large', child: Text('Large')),
+                          ],
+                          onChanged: _onFilterChanged,
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 12),
+                    Text('${products.length} items',
+                        style: const TextStyle(fontSize: 16, color: Colors.grey)),
+                    const SizedBox(height: 12),
+
+                    if (products.isEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        alignment: Alignment.center,
+                        child: const Text('No products in this collection',
+                            style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      )
+                    else
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: columns,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        children: pageProducts.map((p) => Card(
+                          elevation: 2,
+                          clipBehavior: Clip.hardEdge,
+                          child: InkWell(
+                            onTap: () => Navigator.pushNamed(context, '/product', arguments: p),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: p.imageUrl.isNotEmpty
+                                      ? Image.network(
+                                          p.imageUrl,
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          errorBuilder: (context, error, stackTrace) => Container(
+                                            color: Colors.grey[200],
+                                            child: const Center(
+                                              child: Icon(Icons.image_not_supported, color: Colors.grey),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(color: Colors.grey[200]),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: p.imageUrl.isNotEmpty
-                                            ? Image.network(
-                                                p.imageUrl,
-                                                fit: BoxFit.cover,
-                                                width: double.infinity,
-                                                errorBuilder: (context, error,
-                                                        stackTrace) =>
-                                                    Container(
-                                                  color: Colors.grey[200],
-                                                  child: const Center(
-                                                      child: Icon(
-                                                          Icons
-                                                              .image_not_supported,
-                                                          color: Colors.grey)),
-                                                ),
-                                              )
-                                            : Container(
-                                                color: Colors.grey[200]),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(p.title,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w600)),
-                                            const SizedBox(height: 6),
-                                            Text(p.price,
-                                                style: const TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.grey)),
-                                          ],
-                                        ),
-                                      ),
+                                      Text(p.title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                                      const SizedBox(height: 6),
+                                      Text(p.price, style: const TextStyle(fontSize: 13, color: Colors.grey)),
                                     ],
                                   ),
                                 ),
-                              ))
-                          .toList(),
-                    ),
+                              ],
+                            ),
+                          ),
+                        )).toList(),
+                      ),
 
-                  // Pagination controls
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _currentPage > 0
-                            ? () => setState(() => _currentPage--)
-                            : null,
-                        child: const Text('Previous'),
-                      ),
-                      const SizedBox(width: 12),
-                      Text('${_currentPage + 1} of ${totalPages == 0 ? 1 : totalPages}'),
-                      const SizedBox(width: 12),
-                      ElevatedButton(
-                        onPressed: _currentPage < (totalPages - 1)
-                            ? () => setState(() => _currentPage++)
-                            : null,
-                        child: const Text('Next'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                ],
-              ),
+                    const SizedBox(height: 12),
+                  ],
+                );
+              }),
             ),
             AppFooter(),
           ],
