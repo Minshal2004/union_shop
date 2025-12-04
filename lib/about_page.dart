@@ -48,7 +48,7 @@ class AboutPage extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 24),
 
                         // Main content in a clean left-aligned column, but use
                         // justified text for tidy edges within the constrained width.
@@ -60,23 +60,23 @@ class AboutPage extends StatelessWidget {
                               textAlign: TextAlign.justify,
                               style: TextStyle(fontSize: 16, height: 1.5),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 16),
                             Text(
                               'Services',
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 12),
                             Text(
                               'Click & collect, online ordering, and in-store purchases. Student discounts apply to selected items and we run seasonal promotions throughout the year.',
                               textAlign: TextAlign.justify,
                               style: TextStyle(fontSize: 16, height: 1.5),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 16),
                             Text(
                               'Opening times & contact',
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 12),
                             Text(
                               'Open Mon–Fri 9:00–17:00. For enquiries email info@upsu.net or visit shop.upsu.net for full store information and latest offers.',
                               textAlign: TextAlign.justify,
