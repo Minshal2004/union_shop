@@ -1,41 +1,25 @@
-// ...new file...
 import 'package:union_shop/models/product.dart';
 
-/// Collection model representing a group of products.
+/// Simple Collection model for static sample data.
 class Collection {
   final String id;
   final String title;
-  final String imageUrl;
+  final String category;
   final List<Product> products;
+  final String imageUrl;
+  final String description;
 
   Collection({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.products,
-  });
+    String? id,
+    String? title,
+    String? category,
+    List<Product>? products,
+    this.imageUrl = '',
+    this.description = '',
+  })  : id = id ?? '',
+        title = title ?? '',
+        category = category ?? '',
+        products = products ?? const [];
 
-  factory Collection.fromMap(Map<String, dynamic> map) {
-    final rawProducts = map['products'] as List<dynamic>?;
-    return Collection(
-      id: map['id']?.toString() ?? '',
-      title: map['title'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
-      products: rawProducts
-              ?.map((p) => p is Product
-                  ? p
-                  : Product.fromMap(Map<String, dynamic>.from(p as Map)))
-              .toList() ??
-          [],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'imageUrl': imageUrl,
-      'products': products.map((p) => p.toMap()).toList(),
-    };
-  }
+  // Keep model minimal and static; no toMap/fromMap or JSON helpers.
 }
