@@ -186,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 6.0),
+                                              vertical: 12.0),
                                           child: ElevatedButton(
                                             onPressed: () =>
                                                 navigateToProduct(context),
@@ -234,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 6.0),
+                                              vertical: 12.0),
                                           child: ElevatedButton(
                                             onPressed: () =>
                                                 navigateToProduct(context),
