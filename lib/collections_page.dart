@@ -200,10 +200,14 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             SizedBox(height: isMobile ? 6 : 8),
-                                            Text('${c.products.length} items',
-                                                style: const TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.grey)),
+                                            Text(
+                                              '${c.products.length} items',
+                                              style: const TextStyle(
+                                                  fontSize: 13,
+                                                  color: Colors.grey),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -276,9 +280,12 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       SizedBox(height: isMobile ? 6 : 8),
-                                      Text('${c.products.length} items',
-                                          style: const TextStyle(
-                                              fontSize: 13, color: Colors.grey)),
+                                      Text(
+                                        '${c.products.length} items',
+                                        style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ],
                                   ),
                                 ),
