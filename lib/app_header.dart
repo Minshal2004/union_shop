@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
-  final VoidCallback onLogoTap;
-  final VoidCallback onButtonPressed;
+  final VoidCallback? onCartTap;
+  final VoidCallback? onLogoTap;
+  final VoidCallback? onButtonPressed;
 
   const AppHeader(
-      {super.key, required this.onLogoTap, required this.onButtonPressed});
+      {super.key, this.onLogoTap, this.onButtonPressed, this.onCartTap});
 
   @override
   Widget build(BuildContext context) {
@@ -138,8 +139,7 @@ class AppHeader extends StatelessWidget {
                               minWidth: 32,
                               minHeight: 32,
                             ),
-                            onPressed: () =>
-                                Navigator.pushNamed(context, '/cart'),
+                            onPressed: onCartTap ?? () => Navigator.pushNamed(context, '/cart'),
                           ),
                         ),
                         Tooltip(
