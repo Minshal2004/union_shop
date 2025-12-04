@@ -47,42 +47,70 @@ class _CollectionPageState extends State<CollectionPage> {
   // Sort state and handler
   String _sortValue = 'Relevance';
 
+  // Size filter state
+  String _sizeFilter = 'All';
+
+  // Apply current filter (based on originalProducts) to visibleProducts
+  void _applyFilter() {
+    if (_sizeFilter == 'All') {
+      _visibleProducts = List.from(_originalProducts);
+    } else {
+      _visibleProducts = _originalProducts.where((p) {
+        final size = (p.size ?? '').toString();
+        return size == _sizeFilter;
+      }).toList();
+    }
+  }
+
+  // Apply current sort to the visibleProducts list
+  void _applySort() {
+    if (_sortValue == 'Relevance') return; // keep current order
+
+    if (_sortValue == 'Title') {
+      _visibleProducts.sort((a, b) =>
+          (a.title ?? '').toString().toLowerCase()
+              .compareTo((b.title ?? '').toString().toLowerCase()));
+      return;
+    }
+
+    double parsePrice(String p) {
+      final cleaned = p.replaceAll(RegExp('[^0-9\.]'), '');
+      return double.tryParse(cleaned) ?? 0.0;
+    }
+
+    if (_sortValue == 'PriceLow') {
+      _visibleProducts.sort((a, b) =>
+          parsePrice((a.price ?? '').toString()).compareTo(
+              parsePrice((b.price ?? '').toString())));
+      return;
+    }
+
+    if (_sortValue == 'PriceHigh') {
+      _visibleProducts.sort((a, b) =>
+          parsePrice((b.price ?? '').toString()).compareTo(
+              parsePrice((a.price ?? '').toString())));
+      return;
+    }
+  }
+
   void _onSortChanged(String? value) {
     if (value == null) return;
     setState(() {
       _sortValue = value;
-      if (_sortValue == 'Relevance') {
-        // restore original order
-        _visibleProducts = List.from(_originalProducts);
-        return;
-      }
+      // Rebuild from original order then apply filter + sort to keep behavior predictable
+      _applyFilter();
+      _applySort();
+    });
+  }
 
-      if (_sortValue == 'Title') {
-        _visibleProducts.sort((a, b) =>
-            (a.title ?? '').toString().toLowerCase()
-                .compareTo((b.title ?? '').toString().toLowerCase()));
-        return;
-      }
-
-      // price-based sorting: try to parse numeric value from price string
-      double parsePrice(String p) {
-        final cleaned = p.replaceAll(RegExp('[^0-9\.]'), '');
-        return double.tryParse(cleaned) ?? 0.0;
-      }
-
-      if (_sortValue == 'PriceLow') {
-        _visibleProducts.sort((a, b) =>
-            parsePrice((a.price ?? '').toString()).compareTo(
-                parsePrice((b.price ?? '').toString())));
-        return;
-      }
-
-      if (_sortValue == 'PriceHigh') {
-        _visibleProducts.sort((a, b) =>
-            parsePrice((b.price ?? '').toString()).compareTo(
-                parsePrice((a.price ?? '').toString())));
-        return;
-      }
+  void _onFilterChanged(String? value) {
+    if (value == null) return;
+    setState(() {
+      _sizeFilter = value;
+      // rebuild the visible products from the original snapshot according to the selected size
+      _applyFilter();
+      // apply the active sort (if any)
+      _applySort();
     });
   }
 
@@ -131,14 +159,14 @@ class _CollectionPageState extends State<CollectionPage> {
                       ),
                       const SizedBox(width: 16),
                       DropdownButton<String>(
-                        value: 'All',
+                        value: _sizeFilter,
                         items: const [
                           DropdownMenuItem(value: 'All', child: Text('All')),
                           DropdownMenuItem(value: 'Small', child: Text('Small')),
                           DropdownMenuItem(value: 'Medium', child: Text('Medium')),
                           DropdownMenuItem(value: 'Large', child: Text('Large')),
                         ],
-                        onChanged: (_) {},
+                        onChanged: _onFilterChanged,
                       ),
                     ],
                   ),
