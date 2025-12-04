@@ -75,6 +75,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
   Widget build(BuildContext context) {
     // Use the shared sample collections data for rendering
     final collections = _collections;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final gridColumns = screenWidth < 600 ? 2 : 4;
     // pagination calculations
     final totalPages = (collections.length + _pageSize - 1) ~/ _pageSize;
     final startIndex = _currentPage * _pageSize;
@@ -137,11 +139,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 4 : 2,
+                    crossAxisCount: gridColumns,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    children: collections
+                    // featured items use the static sampleCollections snapshot
+                    children: sampleCollections
                         .take(4)
                         .map((c) => Card(
                               elevation: 2,
@@ -205,8 +207,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 4 : 2,
+                    crossAxisCount: gridColumns,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     children: pageCollections.map((c) {
