@@ -4,12 +4,10 @@ import 'package:union_shop/models/product.dart';
 class CartItem {
   final Product product;
   int quantity;
-  String? selectedOption;
 
   CartItem({
     required this.product,
     this.quantity = 1,
-    this.selectedOption,
   });
 
   double get unitPrice {
@@ -19,5 +17,5 @@ class CartItem {
 
   double get totalPrice => unitPrice * quantity;
 
-  // serialization removed: store Product directly without toJson/fromJson
+  // No serialization — store Product directly
 }
