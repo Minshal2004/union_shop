@@ -3,11 +3,16 @@ import 'package:union_shop/app_header.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/app_footer.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   final Product? product;
 
   const ProductPage({super.key, this.product});
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -26,7 +31,7 @@ class ProductPage extends StatelessWidget {
     // current route's settings.arguments so navigation can pass a Product.
     final args = ModalRoute.of(context)?.settings.arguments;
     final Product? productFromArgs = args is Product ? args : null;
-    final product = this.product ?? productFromArgs;
+    final product = widget.product ?? productFromArgs;
 
     // The UI below uses product.title, product.imageUrl, product.price and
     // product.description to render the page dynamically.
