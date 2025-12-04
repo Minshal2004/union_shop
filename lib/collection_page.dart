@@ -23,12 +23,29 @@ class _CollectionPageState extends State<CollectionPage> {
     ));
   }
 
+  // Store the collection and a mutable visible products list so we can
+  // filter/sort/paginate locally.
+  Collection? _collection;
+  late List _visibleProducts;
+  bool _productsInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_productsInitialized) {
+      final args = ModalRoute.of(context)?.settings.arguments;
+      _collection = args is Collection ? args : null;
+      _visibleProducts = List.from(_collection?.products ?? []);
+      _productsInitialized = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Read Collection from route arguments (if provided)
-    final args = ModalRoute.of(context)?.settings.arguments;
-    final Collection? collection = args is Collection ? args : null;
-    final products = collection?.products ?? [];
+    // Use the collection and its mutable visibleProducts initialized in
+    // didChangeDependencies.
+    final collection = _collection;
+    final products = _visibleProducts;
 
     return Scaffold(
       body: SingleChildScrollView(
