@@ -183,7 +183,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
 
                                     // Constrain the text area height so cards don't overflow
                                     SizedBox(
-                                      height: isMobile ? 72 : 88,
+                                      height: isMobile ? 64 : 80,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
@@ -199,7 +199,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            SizedBox(height: isMobile ? 8 : 10),
+                                            SizedBox(height: isMobile ? 6 : 8),
                                             Text('${c.products.length} items',
                                                 style: const TextStyle(
                                                     fontSize: 13,
@@ -261,7 +261,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
 
                               // Constrain the text area height so cards don't overflow
                               SizedBox(
-                                height: isMobile ? 72 : 88,
+                                height: isMobile ? 64 : 80,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
@@ -275,7 +275,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      SizedBox(height: isMobile ? 8 : 10),
+                                      SizedBox(height: isMobile ? 6 : 8),
                                       Text('${c.products.length} items',
                                           style: const TextStyle(
                                               fontSize: 13, color: Colors.grey)),
