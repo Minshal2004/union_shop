@@ -18,33 +18,12 @@ class Product {
     String? id,
     String? name,
     String? title,
-    required this.price,
-    required this.imageUrl,
-    required this.description,
+    this.price = '',
+    this.imageUrl = '',
+    this.description = '',
   })  : id = id ?? '',
         name = name ?? title ?? '';
 
   // Backwards-compatible getter for code that expects `title`.
   String get title => name;
-
-  factory Product.fromMap(Map<String, dynamic> map) {
-    return Product(
-      id: map['id']?.toString(),
-      name: map['name'],
-      title: map['title'],
-      price: map['price']?.toString() ?? '',
-      imageUrl: map['imageUrl'] ?? '',
-      description: map['description'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'price': price,
-      'imageUrl': imageUrl,
-      'description': description,
-    };
-  }
 }
