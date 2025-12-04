@@ -49,6 +49,9 @@ class _CollectionPageState extends State<CollectionPage> {
 
   // Size filter state
   String _sizeFilter = 'All';
+  // Pagination state
+  int _currentPage = 0;
+  final int _pageSize = 6;
 
   // Apply current filter (based on originalProducts) to visibleProducts
   void _applyFilter() {
@@ -100,6 +103,8 @@ class _CollectionPageState extends State<CollectionPage> {
       // Rebuild from original order then apply filter + sort to keep behavior predictable
       _applyFilter();
       _applySort();
+      // reset to first page when sort changes
+      _currentPage = 0;
     });
   }
 
@@ -111,6 +116,8 @@ class _CollectionPageState extends State<CollectionPage> {
       _applyFilter();
       // apply the active sort (if any)
       _applySort();
+      // reset to first page when filter changes
+      _currentPage = 0;
     });
   }
 
@@ -120,6 +127,10 @@ class _CollectionPageState extends State<CollectionPage> {
     // didChangeDependencies.
     final collection = _collection;
     final products = _visibleProducts;
+    // pagination calculations
+    final totalPages = (products.length + _pageSize - 1) ~/ _pageSize;
+    final startIndex = _currentPage * _pageSize;
+    final pageProducts = products.skip(startIndex).take(_pageSize).toList();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -177,7 +188,7 @@ class _CollectionPageState extends State<CollectionPage> {
                   const SizedBox(height: 12),
 
                   // Products from the provided collection (or a friendly fallback)
-                  if (products.isEmpty)
+                  if (pageProducts.isEmpty)
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 24),
                       alignment: Alignment.center,
@@ -192,7 +203,7 @@ class _CollectionPageState extends State<CollectionPage> {
                           MediaQuery.of(context).size.width > 800 ? 4 : 2,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
-                      children: products
+                      children: pageProducts
                           .map((p) => Card(
                                 elevation: 2,
                                 clipBehavior: Clip.hardEdge,
@@ -249,6 +260,29 @@ class _CollectionPageState extends State<CollectionPage> {
                               ))
                           .toList(),
                     ),
+
+                  // Pagination controls
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _currentPage > 0
+                            ? () => setState(() => _currentPage--)
+                            : null,
+                        child: const Text('Previous'),
+                      ),
+                      const SizedBox(width: 12),
+                      Text('${_currentPage + 1} of ${totalPages == 0 ? 1 : totalPages}'),
+                      const SizedBox(width: 12),
+                      ElevatedButton(
+                        onPressed: _currentPage < (totalPages - 1)
+                            ? () => setState(() => _currentPage++)
+                            : null,
+                        child: const Text('Next'),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 12),
                 ],
               ),
