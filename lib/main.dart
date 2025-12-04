@@ -119,7 +119,8 @@ class HomeScreen extends StatelessWidget {
 
             // Hero Section
             SizedBox(
-              height: isMobile ? MediaQuery.of(context).size.height * 0.42 : 400,
+              height:
+                  isMobile ? MediaQuery.of(context).size.height * 0.42 : 400,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -186,17 +187,18 @@ class HomeScreen extends StatelessWidget {
                                     child: const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 14.0),
-                                      child:
-                                          Text('SHOP NOW', style: TextStyle(letterSpacing: 1)),
+                                      child: Text('SHOP NOW',
+                                          style: TextStyle(letterSpacing: 1)),
                                     ),
                                   ),
                                   const SizedBox(height: 12),
                                   OutlinedButton(
-                                    onPressed: () =>
-                                        Navigator.pushNamed(context, '/personalisation'),
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, '/personalisation'),
                                     style: OutlinedButton.styleFrom(
                                       foregroundColor: const Color(0xFF4d2963),
-                                      side: const BorderSide(color: Color(0xFF4d2963)),
+                                      side: const BorderSide(
+                                          color: Color(0xFF4d2963)),
                                     ),
                                     child: const Padding(
                                       padding:
@@ -221,7 +223,8 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     child: const Text(
                                       'SHOP NOW',
-                                      style: TextStyle(fontSize: 14, letterSpacing: 1),
+                                      style: TextStyle(
+                                          fontSize: 14, letterSpacing: 1),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -230,7 +233,8 @@ class HomeScreen extends StatelessWidget {
                                         context, '/personalisation'),
                                     style: OutlinedButton.styleFrom(
                                       foregroundColor: const Color(0xFF4d2963),
-                                      side: const BorderSide(color: Color(0xFF4d2963)),
+                                      side: const BorderSide(
+                                          color: Color(0xFF4d2963)),
                                     ),
                                     child: const Padding(
                                       padding: EdgeInsets.symmetric(
