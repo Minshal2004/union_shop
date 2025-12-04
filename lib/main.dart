@@ -143,139 +143,145 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   // Content overlay
-                  Positioned(
-                    left: isMobile ? 16 : 24,
-                    right: isMobile ? 16 : 24,
-                    top: isMobile ? 36 : 80,
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          // allow full width on mobile, but cap width on wider screens
-                          maxWidth: isMobile ? double.infinity : 900,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Union Shop – Official Students\' Union Store',
-                              style: TextStyle(
-                                fontSize: isMobile ? 20 : 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                height: 1.2,
+                  Positioned.fill(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            // allow full width on mobile, but cap width on wider screens
+                            maxWidth: isMobile ? double.infinity : 1100,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Union Shop – Official Students\' Union Store',
+                                style: TextStyle(
+                                  fontSize: isMobile ? 20 : 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  height: 1.2,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: isMobile ? 12 : 16),
-                            Text(
-                              "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
-                              style: TextStyle(
-                                fontSize: isMobile ? 14 : 20,
-                                color: Colors.white,
-                                height: 1.4,
+                              SizedBox(height: isMobile ? 12 : 16),
+                              Text(
+                                "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
+                                style: TextStyle(
+                                  fontSize: isMobile ? 14 : 20,
+                                  color: Colors.white,
+                                  height: 1.4,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: isMobile ? 20 : 32),
-                            // buttons: stack vertically on mobile for easier tapping
-                            isMobile
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 6.0),
-                                        child: ElevatedButton(
+                              SizedBox(height: isMobile ? 20 : 32),
+                              // buttons: stack vertically on mobile for easier tapping
+                              isMobile
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6.0),
+                                          child: ElevatedButton(
+                                            onPressed: () =>
+                                                navigateToProduct(context),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color(0xFF4d2963),
+                                              foregroundColor: Colors.white,
+                                              shape: const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                            ),
+                                            child: const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 14.0),
+                                              child: Text('SHOP NOW',
+                                                  style: TextStyle(
+                                                      letterSpacing: 1)),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        OutlinedButton(
                                           onPressed: () =>
-                                              navigateToProduct(context),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
+                                              Navigator.pushNamed(
+                                                  context, '/personalisation'),
+                                          style: OutlinedButton.styleFrom(
+                                            foregroundColor:
                                                 const Color(0xFF4d2963),
-                                            foregroundColor: Colors.white,
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.zero),
+                                            side: const BorderSide(
+                                                color: Color(0xFF4d2963)),
                                           ),
                                           child: const Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 14.0),
-                                            child: Text('SHOP NOW',
+                                            child: Text('PERSONALISE',
                                                 style: TextStyle(
                                                     letterSpacing: 1)),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 12),
-                                      OutlinedButton(
-                                        onPressed: () => Navigator.pushNamed(
-                                            context, '/personalisation'),
-                                        style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFF4d2963),
-                                          side: const BorderSide(
-                                              color: Color(0xFF4d2963)),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 14.0),
-                                          child: Text('PERSONALISE',
-                                              style:
-                                                  TextStyle(letterSpacing: 1)),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 6.0),
-                                        child: ElevatedButton(
-                                          onPressed: () =>
-                                              navigateToProduct(context),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                const Color(0xFF4d2963),
-                                            foregroundColor: Colors.white,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero,
+                                      ],
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6.0),
+                                          child: ElevatedButton(
+                                            onPressed: () =>
+                                                navigateToProduct(context),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color(0xFF4d2963),
+                                              foregroundColor: Colors.white,
+                                              shape: const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.zero,
+                                              ),
                                             ),
+                                            child: const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 8.0,
+                                                  vertical: 12.0),
+                                              child: Text(
+                                                'SHOP NOW',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    letterSpacing: 1),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        OutlinedButton(
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, '/personalisation'),
+                                          style: OutlinedButton.styleFrom(
+                                            foregroundColor:
+                                                const Color(0xFF4d2963),
+                                            side: const BorderSide(
+                                                color: Color(0xFF4d2963)),
                                           ),
                                           child: const Padding(
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0,
-                                                vertical: 12.0),
-                                            child: Text(
-                                              'SHOP NOW',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  letterSpacing: 1),
-                                            ),
+                                                horizontal: 8.0, vertical: 12.0),
+                                            child: Text('PERSONALISE',
+                                                style:
+                                                    TextStyle(letterSpacing: 1)),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 12),
-                                      OutlinedButton(
-                                        onPressed: () => Navigator.pushNamed(
-                                            context, '/personalisation'),
-                                        style: OutlinedButton.styleFrom(
-                                          foregroundColor:
-                                              const Color(0xFF4d2963),
-                                          side: const BorderSide(
-                                              color: Color(0xFF4d2963)),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 12.0),
-                                          child: Text('PERSONALISE',
-                                              style:
-                                                  TextStyle(letterSpacing: 1)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                          ],
+                                      ],
+                                    ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
