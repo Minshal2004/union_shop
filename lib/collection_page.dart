@@ -241,21 +241,23 @@ class _CollectionPageState extends State<CollectionPage> {
                                           )
                                         : Container(color: Colors.grey[200]),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          p.title,
-                                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Text(p.price, style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                                      ],
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            p.title,
+                                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(p.price, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],

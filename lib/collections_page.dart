@@ -157,9 +157,9 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    // fixed aspect image to avoid layout overflow
+                                    // Constrain image with a consistent aspect ratio
                                     AspectRatio(
-                                      aspectRatio: isMobile ? 1.2 : 1.3,
+                                      aspectRatio: 3 / 4,
                                       child: c.imageUrl.isNotEmpty
                                           ? Image.network(
                                               c.imageUrl,
@@ -178,27 +178,31 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                             )
                                           : Container(color: Colors.grey[200]),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            c.title,
-                                            style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const SizedBox(height: 6),
-                                          Text('${c.products.length} items',
+
+                                    // Text area should be flexible so it doesn't force extra height
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              c.title,
                                               style: const TextStyle(
-                                                  fontSize: 13,
-                                                  color: Colors.grey)),
-                                        ],
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(height: 6),
+                                            Text('${c.products.length} items',
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.grey)),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -231,8 +235,9 @@ class _CollectionsPageState extends State<CollectionsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              // Constrain image with a consistent aspect ratio
                               AspectRatio(
-                                aspectRatio: isMobile ? 1.2 : 1.3,
+                                aspectRatio: 3 / 4,
                                 child: c.imageUrl.isNotEmpty
                                     ? Image.network(
                                         c.imageUrl,
@@ -250,24 +255,28 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                       )
                                     : Container(color: Colors.grey[200]),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      c.title,
-                                      style: const TextStyle(
-                                          fontSize: 14, fontWeight: FontWeight.w600),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text('${c.products.length} items',
+
+                              // Text area should be flexible so it doesn't force extra height
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        c.title,
                                         style: const TextStyle(
-                                            fontSize: 13, color: Colors.grey)),
-                                  ],
+                                            fontSize: 14, fontWeight: FontWeight.w600),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text('${c.products.length} items',
+                                          style: const TextStyle(
+                                              fontSize: 13, color: Colors.grey)),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
