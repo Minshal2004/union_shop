@@ -189,7 +189,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
                                               c.title,
@@ -199,7 +199,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            const Spacer(),
+                                            SizedBox(height: isMobile ? 8 : 10),
                                             Text('${c.products.length} items',
                                                 style: const TextStyle(
                                                     fontSize: 13,
@@ -266,7 +266,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
                                         c.title,
@@ -275,7 +275,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      const Spacer(),
+                                      SizedBox(height: isMobile ? 8 : 10),
                                       Text('${c.products.length} items',
                                           style: const TextStyle(
                                               fontSize: 13, color: Colors.grey)),
