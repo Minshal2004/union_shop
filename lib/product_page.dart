@@ -29,6 +29,10 @@ class _ProductPageState extends State<ProductPage> {
   Product? _product;
   bool _productInitialized = false;
 
+  // Selected size/option for the product (updated via Dropdown)
+  String _selectedSize = 'Select size';
+  final List<String> _sizeOptions = ['Select size', 'Small', 'Medium', 'Large'];
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -138,6 +142,31 @@ class _ProductPageState extends State<ProductPage> {
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
                     ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Size / option selector
+                  Row(
+                    children: [
+                      const Text('Size:', style: TextStyle(fontSize: 16)),
+                      const SizedBox(width: 12),
+                      DropdownButton<String>(
+                        value: _selectedSize,
+                        items: _sizeOptions
+                            .map((s) => DropdownMenuItem(
+                                  value: s,
+                                  child: Text(s),
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          if (val == null) return;
+                          setState(() {
+                            _selectedSize = val;
+                          });
+                        },
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 24),
