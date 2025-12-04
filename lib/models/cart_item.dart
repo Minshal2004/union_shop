@@ -19,15 +19,5 @@ class CartItem {
 
   double get totalPrice => unitPrice * quantity;
 
-  Map<String, dynamic> toJson() => {
-        'product': product.toJson(),
-        'quantity': quantity,
-        'selectedOption': selectedOption,
-      };
-
-  factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-        product: Product.fromJson(json['product'] ?? {}),
-        quantity: (json['quantity'] ?? 1) as int,
-        selectedOption: json['selectedOption'] as String?,
-      );
+  // serialization removed: store Product directly without toJson/fromJson
 }
