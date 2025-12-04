@@ -27,6 +27,9 @@ class _CollectionsPageState extends State<CollectionsPage> {
   String _sortValue = 'Relevance';
   // Category filter state
   String _categoryValue = 'All';
+  // Pagination state
+  int _currentPage = 0;
+  final int _pageSize = 4;
   late List _collections;
 
   @override
@@ -43,6 +46,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
       // Sort alphabetically by title when the sort value changes
       _collections.sort((a, b) =>
           (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
+      // reset to first page when sorting changes
+      _currentPage = 0;
     });
   }
 
@@ -61,6 +66,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
         _collections.sort((a, b) =>
             (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
       }
+      // clamp or reset current page when filtering changes
+      _currentPage = 0;
     });
   }
 
@@ -68,6 +75,10 @@ class _CollectionsPageState extends State<CollectionsPage> {
   Widget build(BuildContext context) {
     // Use the shared sample collections data for rendering
     final collections = _collections;
+    // pagination calculations
+    final totalPages = (collections.length + _pageSize - 1) ~/ _pageSize;
+    final startIndex = _currentPage * _pageSize;
+    final pageCollections = collections.skip(startIndex).take(_pageSize).toList();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -198,7 +209,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         MediaQuery.of(context).size.width > 800 ? 4 : 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    children: collections.map((c) {
+                    children: pageCollections.map((c) {
                       return Card(
                         elevation: 2,
                         clipBehavior: Clip.hardEdge,
@@ -234,8 +245,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                   children: [
                                     Text(c.title,
                                         style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600)),
+                                            fontSize: 14, fontWeight: FontWeight.w600)),
                                     const SizedBox(height: 6),
                                     Text('${c.products.length} items',
                                         style: const TextStyle(
@@ -248,6 +258,29 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         ),
                       );
                     }).toList(),
+                  ),
+
+                  // Pagination controls
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _currentPage > 0
+                            ? () => setState(() => _currentPage--)
+                            : null,
+                        child: const Text('Previous'),
+                      ),
+                      const SizedBox(width: 12),
+                      Text('${_currentPage + 1} of ${totalPages == 0 ? 1 : totalPages}'),
+                      const SizedBox(width: 12),
+                      ElevatedButton(
+                        onPressed: _currentPage < (totalPages - 1)
+                            ? () => setState(() => _currentPage++)
+                            : null,
+                        child: const Text('Next'),
+                      ),
+                    ],
                   ),
                 ],
               ),
