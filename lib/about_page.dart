@@ -44,52 +44,58 @@ class AboutPage extends StatelessWidget {
                     maxWidth: maxContentWidth,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 24, vertical: 32),
+                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 24, vertical: 48),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Centered page heading
+                        // Heading
                         Text(
                           'About the Union Shop',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: isMobile ? 24 : 32, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: isMobile ? 12 : 16),
 
-                        // Main content in a clean left-aligned column, but use
-                        // justified text for tidy edges within the constrained width.
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "The Union Shop provides essential study supplies and official Students' Union merchandise to support campus life. We stock stationery, course materials, branded clothing, and city souvenirs.",
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(fontSize: 16, height: 1.5),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'Services',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Click & collect, online ordering, and in-store purchases. Student discounts apply to selected items and we run seasonal promotions throughout the year.',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(fontSize: 16, height: 1.5),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'Opening times & contact',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Open Mon–Fri 9:00–17:00. For enquiries email info@upsu.net or visit shop.upsu.net for full store information and latest offers.',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(fontSize: 16, height: 1.5),
-                            ),
-                          ],
+                        // Lead paragraph
+                        Text(
+                          'The official Students\' Union store — campus essentials, course supplies and official merch. Shop online or collect in-store at the Students\' Union.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.grey[800], height: 1.5),
                         ),
+                        SizedBox(height: isMobile ? 20 : 28),
+
+                        // Constrained body for comfortable reading on desktop
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: isMobile ? double.infinity : 720),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Our mission', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                              const SizedBox(height: 8),
+                              Text(
+                                'We provide affordable, reliable supplies and official University merchandise to support student life. From stationery and course materials to branded clothing and city souvenirs, our aim is to make campus life easier and more connected.',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(fontSize: 16, height: 1.6, color: Colors.grey[800]),
+                              ),
+                              const SizedBox(height: 16),
+                              Text('Visit us', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Visit shop.upsu.net for full online shopping, or call in to our campus store Mon–Fri 9:00–17:00. For enquiries email info@upsu.net.',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(fontSize: 16, height: 1.6, color: Colors.grey[800]),
+                              ),
+                              const SizedBox(height: 20),
+                              Center(
+                                child: TextButton(
+                                  onPressed: () => Navigator.pushNamed(context, '/collections'),
+                                  child: const Text('Browse Collections', style: TextStyle(letterSpacing: 1)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 32 : 48),
                       ],
                     ),
                   ),
