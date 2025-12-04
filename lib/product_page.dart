@@ -75,6 +75,15 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 
+  String _fallbackForTitle(String title) {
+    final t = title.toLowerCase();
+    if (t.contains('hoodie')) return hoodieImage;
+    if (t.contains('sweat') || t.contains('sweatshirt')) return sweatshirtImage;
+    if (t.contains('t-shirt') || t.contains('tshirt') || t.contains('tee')) return tshirtImage;
+    if (t.contains('trouser') || t.contains('jogger') || t.contains('chino')) return trousersImage;
+    return hoodieImage;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Use the product stored in state (initialized from widget or route args)
@@ -102,19 +111,24 @@ class _ProductPageState extends State<ProductPage> {
             Widget imageColumn = Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Large image
+                // Large image (always show fallback by title on error)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: AspectRatio(
-                    aspectRatio: isMobile ? 1.1 : 4 / 5,
+                    aspectRatio: 3 / 4,
                     child: Image.network(
                       _mainImageUrl,
                       fit: BoxFit.cover,
                       width: double.infinity,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: Icon(Icons.image_not_supported)),
-                      ),
+                      errorBuilder: (context, error, stackTrace) {
+                        final fallback = _fallbackForTitle(product.title);
+                        return Image.network(
+                          fallback,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -142,11 +156,20 @@ class _ProductPageState extends State<ProductPage> {
                                   fit: BoxFit.cover,
                                   width: 72,
                                   height: 72,
-                                  errorBuilder: (_, __, ___) => Container(
-                                    color: Colors.grey[200],
-                                    width: 72,
-                                    height: 72,
-                                  ),
+                                  errorBuilder: (_, __, ___) {
+                                    final fallback = _fallbackForTitle(product.title);
+                                    return Image.network(
+                                      fallback,
+                                      fit: BoxFit.cover,
+                                      width: 72,
+                                      height: 72,
+                                      errorBuilder: (_, __, ___) => Container(
+                                        color: Colors.grey[200],
+                                        width: 72,
+                                        height: 72,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
