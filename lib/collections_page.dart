@@ -25,6 +25,8 @@ class _CollectionsPageState extends State<CollectionsPage> {
 
   // Sorting state and a mutable copy of the sample collections so we can sort
   String _sortValue = 'Relevance';
+  // Category filter state
+  String _categoryValue = 'All';
   late List _collections;
 
   @override
@@ -41,6 +43,24 @@ class _CollectionsPageState extends State<CollectionsPage> {
       // Sort alphabetically by title when the sort value changes
       _collections.sort((a, b) =>
           (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
+    });
+  }
+
+  void _onCategoryChanged(String? value) {
+    if (value == null) return;
+    setState(() {
+      _categoryValue = value;
+      // rebuild filtered collections from the original sample data
+      final base = List.from(sampleCollections);
+      _collections = base.where((c) {
+        final cat = (c.category ?? '').toString();
+        return _categoryValue == 'All' || cat == _categoryValue;
+      }).toList();
+      // preserve current sort if not 'Relevance'
+      if (_sortValue != 'Relevance') {
+        _collections.sort((a, b) =>
+            (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
+      }
     });
   }
 
@@ -87,7 +107,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                       ),
                       const SizedBox(width: 16),
                       DropdownButton<String>(
-                        value: 'All',
+                        value: _categoryValue,
                         items: const [
                           DropdownMenuItem(value: 'All', child: Text('All')),
                           DropdownMenuItem(
@@ -97,7 +117,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                           DropdownMenuItem(
                               value: 'Gifts', child: Text('Gifts')),
                         ],
-                        onChanged: (_) {},
+                        onChanged: _onCategoryChanged,
                       ),
                     ],
                   ),
