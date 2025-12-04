@@ -77,7 +77,24 @@ class _CartPageState extends State<CartPage> {
                                   height: 56),
                           title: Text(ci.product.title),
                           subtitle: Text(ci.product.price),
-                          trailing: Text('x${ci.quantity}'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  cartService.updateQuantity(ci, ci.quantity - 1);
+                                },
+                              ),
+                              Text('${ci.quantity}'),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  cartService.updateQuantity(ci, ci.quantity + 1);
+                                },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
