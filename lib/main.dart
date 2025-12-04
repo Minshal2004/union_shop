@@ -183,22 +183,26 @@ class HomeScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: [
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            navigateToProduct(context),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xFF4d2963),
-                                          foregroundColor: Colors.white,
-                                          shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 14.0),
-                                          child: Text('SHOP NOW',
-                                              style:
-                                                  TextStyle(letterSpacing: 1)),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: ElevatedButton(
+                                          onPressed: () =>
+                                              navigateToProduct(context),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color(0xFF4d2963),
+                                            foregroundColor: Colors.white,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.zero),
+                                          ),
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 14.0),
+                                            child: Text('SHOP NOW',
+                                                style: TextStyle(
+                                                    letterSpacing: 1)),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 12),
@@ -224,21 +228,31 @@ class HomeScreen extends StatelessWidget {
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            navigateToProduct(context),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xFF4d2963),
-                                          foregroundColor: Colors.white,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.zero,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: ElevatedButton(
+                                          onPressed: () =>
+                                              navigateToProduct(context),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color(0xFF4d2963),
+                                            foregroundColor: Colors.white,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero,
+                                            ),
                                           ),
-                                        ),
-                                        child: const Text(
-                                          'SHOP NOW',
-                                          style: TextStyle(
-                                              fontSize: 14, letterSpacing: 1),
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0,
+                                                vertical: 12.0),
+                                            child: Text(
+                                              'SHOP NOW',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  letterSpacing: 1),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(width: 12),
