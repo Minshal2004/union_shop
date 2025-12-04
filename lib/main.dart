@@ -310,13 +310,14 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: isMobile ? 1 : 2,
-                      crossAxisSpacing: isMobile ? 12 : 24,
-                      mainAxisSpacing: isMobile ? 24 : 48,
+                      // slightly increased spacing for improved breathing room
+                      crossAxisSpacing: isMobile ? 16 : 28,
+                      mainAxisSpacing: isMobile ? 28 : 56,
                       childAspectRatio: isMobile ? 1.6 : 1.4,
                       children: products
                           .map((p) => Padding(
                                 padding: EdgeInsets.only(
-                                    bottom: isMobile ? 12.0 : 48.0,
+                                    bottom: isMobile ? 16.0 : 56.0,
                                     right: isMobile ? 0 : 0),
                                 child: ProductCard(product: p),
                               ))
