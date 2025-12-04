@@ -7,11 +7,9 @@ class CartService extends ChangeNotifier {
 
   List<CartItem> get items => List.unmodifiable(_items);
 
-  void addItem(Product product, {int quantity = 1, String? selectedOption}) {
-    // match existing by product title and selected option (simple heuristic)
-    final index = _items.indexWhere((ci) =>
-        (ci.product.title ?? '') == (product.title ?? '') &&
-        (ci.selectedOption ?? '') == (selectedOption ?? ''));
+  void addItem(Product product, {int quantity = 1}) {
+    // match existing by product title (simple heuristic for this demo)
+    final index = _items.indexWhere((ci) => ci.product.title == product.title);
 
     if (index >= 0) {
       _items[index].quantity += quantity;
@@ -19,7 +17,6 @@ class CartService extends ChangeNotifier {
       _items.add(CartItem(
         product: product,
         quantity: quantity,
-        selectedOption: selectedOption,
       ));
     }
     notifyListeners();
@@ -50,12 +47,12 @@ class CartService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Convenience: find by product and option
-  CartItem? findItem(Product product, {String? selectedOption}) {
-    return _items.firstWhere(
-        (ci) => (ci.product.title ?? '') == (product.title ?? '') &&
-            (ci.selectedOption ?? '') == (selectedOption ?? ''),
-        orElse: () => null as CartItem);
+  // Convenience: find by product title
+  CartItem? findItem(Product product) {
+    for (final ci in _items) {
+      if (ci.product.title == product.title) return ci;
+    }
+    return null;
   }
 }
 
