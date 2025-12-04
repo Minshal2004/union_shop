@@ -179,14 +179,15 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                           : Container(color: Colors.grey[200]),
                                     ),
 
-                                    // Text area should be flexible so it doesn't force extra height
-                                    Flexible(
+                                    // Constrain the text area height so cards don't overflow
+                                    SizedBox(
+                                      height: isMobile ? 72 : 88,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Text(
                                               c.title,
@@ -196,7 +197,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            const SizedBox(height: 6),
+                                            const Spacer(),
                                             Text('${c.products.length} items',
                                                 style: const TextStyle(
                                                     fontSize: 13,
@@ -256,13 +257,14 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                     : Container(color: Colors.grey[200]),
                               ),
 
-                              // Text area should be flexible so it doesn't force extra height
-                              Flexible(
+                              // Constrain the text area height so cards don't overflow
+                              SizedBox(
+                                height: isMobile ? 72 : 88,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
                                         c.title,
@@ -271,7 +273,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      const SizedBox(height: 6),
+                                      const Spacer(),
                                       Text('${c.products.length} items',
                                           style: const TextStyle(
                                               fontSize: 13, color: Colors.grey)),
