@@ -43,9 +43,9 @@ class _CollectionsPageState extends State<CollectionsPage> {
     if (value == null) return;
     setState(() {
       _sortValue = value;
-      // Sort alphabetically by title when the sort value changes
-      _collections.sort((a, b) =>
-          (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
+      // Always sort the currently visible collections alphabetically (case-insensitive)
+      _collections.sort((a, b) => ((a.title ?? '').toString().toLowerCase())
+          .compareTo((b.title ?? '').toString().toLowerCase()));
       // reset to first page when sorting changes
       _currentPage = 0;
     });
