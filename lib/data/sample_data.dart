@@ -1,86 +1,148 @@
-// ...new file...
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/models/product.dart';
 
+// Example clothing images (hardcoded for static demo)
+const hoodieImage = 'https://shop.upsu.net/media/catalog/product/h/o/hoodie_charcoal.jpg';
+const tshirtImage = 'https://shop.upsu.net/media/catalog/product/t/s/tshirt_white.jpg';
+const trousersImage = 'https://shop.upsu.net/media/catalog/product/t/r/trousers_grey.jpg';
+
 /// Hardcoded sample data for development and testing.
-final List<Collection> sampleCollections = [
+final sampleCollections = [
   Collection(
     id: 'c1',
-    title: 'Campus Clothing',
-    imageUrl: 'https://via.placeholder.com/800x400?text=Campus+Clothing',
+    title: 'Hoodies',
+    category: 'Clothing',
+    imageUrl: hoodieImage,
+    description: 'Official union hoodies and warm layers.',
     products: [
       Product(
         id: 'p1',
-        name: 'Union Hoodie',
-        price: '£25.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Union+Hoodie',
-        description:
-            'Comfortable cotton hoodie with embroidered union logo. Available in multiple sizes.',
+        name: 'Union Hoodie - Charcoal',
+        price: '£35.00',
+        imageUrl: hoodieImage,
+        description: 'Comfortable fleece-lined hoodie with embroidered logo.',
       ),
       Product(
         id: 'p2',
-        name: 'Union T-Shirt',
-        price: '£12.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Union+T-Shirt',
-        description: 'Soft jersey t-shirt printed with the union crest.',
+        name: 'Union Hoodie - Navy',
+        price: '£35.00',
+        imageUrl: hoodieImage,
+        description: 'Navy pullover hoodie, classic fit.',
       ),
     ],
   ),
   Collection(
     id: 'c2',
-    title: 'Stationery',
-    imageUrl: 'https://via.placeholder.com/800x400?text=Stationery',
+    title: 'T-Shirts',
+    category: 'Clothing',
+    imageUrl: tshirtImage,
+    description: 'Casual tees and branded T-shirts.',
     products: [
       Product(
         id: 'p3',
-        name: 'Campus Notebook',
-        price: '£4.50',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Notebook',
-        description:
-            'A5 notebook with 80 lined pages, perfect for lectures and notes.',
+        name: 'Union T-Shirt - White',
+        price: '£12.00',
+        imageUrl: tshirtImage,
+        description: 'Soft cotton tee with printed logo.',
       ),
       Product(
         id: 'p4',
-        name: 'Union Pen Pack',
-        price: '£2.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Pen+Pack',
-        description:
-            'Set of 3 gel pens with smooth ink flow and ergonomic grip.',
+        name: 'Union T-Shirt - Black',
+        price: '£12.00',
+        imageUrl: tshirtImage,
+        description: 'Black crew neck tee, unisex.',
       ),
     ],
   ),
   Collection(
     id: 'c3',
-    title: 'Accessories',
-    imageUrl: 'https://via.placeholder.com/800x400?text=Accessories',
+    title: 'Trousers',
+    category: 'Clothing',
+    imageUrl: trousersImage,
+    description: 'Comfortable trousers and joggers.',
     products: [
       Product(
         id: 'p5',
-        name: 'Union Tote Bag',
-        price: '£7.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Tote+Bag',
-        description: 'Reusable cotton tote bag with union branding.',
+        name: 'Union Joggers - Grey',
+        price: '£25.00',
+        imageUrl: trousersImage,
+        description: 'Relaxed joggers with elastic cuff.',
       ),
       Product(
         id: 'p6',
-        name: 'Union Beanie',
-        price: '£10.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Beanie',
-        description: 'Warm knit beanie embroidered with a small union badge.',
+        name: 'Union Chinos - Khaki',
+        price: '£30.00',
+        imageUrl: trousersImage,
+        description: 'Smart-casual chinos, slim fit.',
       ),
     ],
   ),
   Collection(
     id: 'c4',
-    title: 'Limited Editions',
-    imageUrl: 'https://via.placeholder.com/800x400?text=Limited+Editions',
+    title: 'Accessories',
+    category: 'Accessories',
+    imageUrl: tshirtImage,
+    description: 'Caps, bags and small accessories.',
     products: [
       Product(
         id: 'p7',
-        name: 'Anniversary Mug',
+        name: 'Union Cap',
+        price: '£10.00',
+        imageUrl: tshirtImage,
+        description: 'Adjustable cap with embroidered logo.',
+      ),
+      Product(
+        id: 'p8',
+        name: 'Union Tote Bag',
         price: '£8.00',
-        imageUrl: 'https://via.placeholder.com/600x400?text=Anniversary+Mug',
-        description: 'Collectible mug released for the union anniversary.',
+        imageUrl: tshirtImage,
+        description: 'Canvas tote bag for everyday use.',
+      ),
+    ],
+  ),
+  Collection(
+    id: 'c5',
+    title: 'Gifts',
+    category: 'Gifts',
+    imageUrl: hoodieImage,
+    description: 'Souvenirs and gift items.',
+    products: [
+      Product(
+        id: 'p9',
+        name: 'Union Mug',
+        price: '£6.00',
+        imageUrl: hoodieImage,
+        description: 'Ceramic mug with logo print.',
+      ),
+      Product(
+        id: 'p10',
+        name: 'Union Keyring',
+        price: '£4.00',
+        imageUrl: hoodieImage,
+        description: 'Metal keyring with Union emblem.',
+      ),
+    ],
+  ),
+  Collection(
+    id: 'c6',
+    title: 'Campus Essentials',
+    category: 'Clothing',
+    imageUrl: tshirtImage,
+    description: 'Stationery and everyday essentials (styled with clothing images).',
+    products: [
+      Product(
+        id: 'p11',
+        name: 'Union Notebook',
+        price: '£3.00',
+        imageUrl: tshirtImage,
+        description: 'A5 notebook for lectures and notes.',
+      ),
+      Product(
+        id: 'p12',
+        name: 'Union Pen',
+        price: '£1.50',
+        imageUrl: tshirtImage,
+        description: 'Ballpoint pen with logo branding.',
       ),
     ],
   ),
