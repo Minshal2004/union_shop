@@ -23,10 +23,31 @@ class _CollectionsPageState extends State<CollectionsPage> {
     ));
   }
 
+  // Sorting state and a mutable copy of the sample collections so we can sort
+  String _sortValue = 'Relevance';
+  late List _collections;
+
+  @override
+  void initState() {
+    super.initState();
+    // create a local copy so sorting doesn't mutate the source data
+    _collections = List.from(sampleCollections);
+  }
+
+  void _onSortChanged(String? value) {
+    if (value == null) return;
+    setState(() {
+      _sortValue = value;
+      // Sort alphabetically by title when the sort value changes
+      _collections.sort((a, b) =>
+          (a.title ?? '').toString().compareTo((b.title ?? '').toString()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Use the shared sample collections data for rendering
-    final collections = sampleCollections;
+    final collections = _collections;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -51,7 +72,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   Row(
                     children: [
                       DropdownButton<String>(
-                        value: 'Relevance',
+                        value: _sortValue,
                         items: const [
                           DropdownMenuItem(
                               value: 'Relevance', child: Text('Relevance')),
@@ -62,7 +83,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                               value: 'PriceHigh',
                               child: Text('Price: High to Low')),
                         ],
-                        onChanged: (_) {},
+                        onChanged: _onSortChanged,
                       ),
                       const SizedBox(width: 16),
                       DropdownButton<String>(
