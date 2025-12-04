@@ -91,6 +91,9 @@ class AboutPage extends StatelessWidget {
               ),
             ),
 
+            // extra spacing before footer
+            SizedBox(height: isMobile ? 24 : 48),
+
             // Footer (reused style)
             AppFooter(),
           ],
