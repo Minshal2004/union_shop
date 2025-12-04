@@ -32,6 +32,8 @@ class _ProductPageState extends State<ProductPage> {
   // Selected size/option for the product (updated via Dropdown)
   String _selectedSize = 'Select size';
   final List<String> _sizeOptions = ['Select size', 'Small', 'Medium', 'Large'];
+  // Selected quantity for adding to cart
+  int _quantity = 1;
 
   @override
   void didChangeDependencies() {
@@ -146,7 +148,7 @@ class _ProductPageState extends State<ProductPage> {
 
                   const SizedBox(height: 24),
 
-                  // Size / option selector
+                  // Size selector and quantity + Add to cart
                   Row(
                     children: [
                       const Text('Size:', style: TextStyle(fontSize: 16)),
@@ -166,9 +168,50 @@ class _ProductPageState extends State<ProductPage> {
                           });
                         },
                       ),
+                      const Spacer(),
+                      const Text('Qty:', style: TextStyle(fontSize: 16)),
+                      const SizedBox(width: 8),
+                      DropdownButton<int>(
+                        value: _quantity,
+                        items: List.generate(10, (i) => i + 1)
+                            .map((q) => DropdownMenuItem<int>(
+                                  value: q,
+                                  child: Text(q.toString()),
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          if (val == null) return;
+                          setState(() => _quantity = val);
+                        },
+                      ),
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            final sizeLabel = _selectedSize == 'Select size' ? 'no size selected' : _selectedSize;
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Added $_quantity × ${product.title} (Size: $sizeLabel) to cart'),
+                              duration: const Duration(seconds: 2),
+                            ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 14.0),
+                            child: Text('ADD TO CART', style: TextStyle(letterSpacing: 1)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 24),
 
                   // Product description
