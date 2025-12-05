@@ -194,9 +194,10 @@ class HomeScreen extends StatelessWidget {
                                               backgroundColor:
                                                   const Color(0xFF4d2963),
                                               foregroundColor: Colors.white,
-                                              shape: const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.zero),
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.zero),
                                             ),
                                             child: const Padding(
                                               padding: EdgeInsets.symmetric(
@@ -209,9 +210,8 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 12),
                                         OutlinedButton(
-                                          onPressed: () =>
-                                              Navigator.pushNamed(
-                                                  context, '/personalisation'),
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, '/personalisation'),
                                           style: OutlinedButton.styleFrom(
                                             foregroundColor:
                                                 const Color(0xFF4d2963),
@@ -242,9 +242,9 @@ class HomeScreen extends StatelessWidget {
                                               backgroundColor:
                                                   const Color(0xFF4d2963),
                                               foregroundColor: Colors.white,
-                                              shape: const RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.zero,
                                               ),
                                             ),
                                             child: const Padding(
@@ -272,10 +272,11 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                           child: const Padding(
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 12.0),
+                                                horizontal: 8.0,
+                                                vertical: 12.0),
                                             child: Text('PERSONALISE',
-                                                style:
-                                                    TextStyle(letterSpacing: 1)),
+                                                style: TextStyle(
+                                                    letterSpacing: 1)),
                                           ),
                                         ),
                                       ],

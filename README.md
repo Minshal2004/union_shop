@@ -1,16 +1,20 @@
-# Union Shop — Flutter Coursework
+# Union Shop — Flutter E-Commerce Application
 
-This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
+A Flutter-based recreation of the University of Portsmouth Students' Union shop ([shop.upsu.net](https://shop.upsu.net)), developed as coursework for **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)**.
 
-## Overview
+## 📱 Overview
 
-The Student Union has an e-commerce website, which you can access via this link: [shop.upsu.net](https://shop.upsu.net)
+This application is a mobile-first e-commerce platform that replicates the functionality of the UPSU shop website. Built with Flutter, it features product browsing, cart management, user authentication, and personalization services.
 
-In short, your task is to recreate the same website using Flutter. You must not start from scratch, as you need to begin by forking the GitHub repository that contains the incomplete code. [The getting started section of this document](#getting-started) will explain more. Once you have completed the application, you will submit the link to your forked repository on Moodle for assessment and demonstrate your application in a practical session. See the [submission](#submission) and [demonstration](#demonstration) sections for more information.
+### ✨ Key Features
 
-⚠️ The UPSU.net link on the navbar of the union website is a link to an external site. This is not part of the application that you need to develop. So ignore the link highlighted below:
-
-![Union Shop Header](https://raw.githubusercontent.com/manighahrmani/sandwich_shop/refs/heads/main/images/screenshot_union_site_header.png)
+- **Product Catalog**: Browse featured products, collections, and sale items
+- **Shopping Cart**: Add products to cart with quantity management
+- **Product Pages**: Detailed product views with size/color selection
+- **Personalisation**: Custom text printing service (Print Shack)
+- **Navigation**: Multi-page app with full routing
+- **Responsive Design**: Optimized for mobile with desktop support
+- **Modern UI**: Clean, intuitive interface matching university branding
 
 ## Getting Started
 
