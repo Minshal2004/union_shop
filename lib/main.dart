@@ -87,14 +87,14 @@ class HomeScreen extends StatelessWidget {
         title: 'Union Hoodie',
         price: '£25.00',
         imageUrl:
-            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+            'https://shop.upsu.net/cdn/shop/files/ClassicSweatshirt-Navy_1024x1024@2x.jpg?v=1683556534',
         description: 'Comfortable unisex hoodie with Union Shop branding.',
       ),
       Product(
         title: 'City Postcard Pack',
         price: '£15.00',
         imageUrl:
-            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
         description:
             'Set of 5 postcards featuring the city — perfect for souvenirs.',
       ),
@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
         title: 'Union Tote Bag',
         price: '£8.00',
         imageUrl:
-            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+            'https://shop.upsu.net/cdn/shop/files/ClassicToteBag-Black_1024x1024@2x.jpg?v=1683556683',
         description: 'Reusable tote bag with Union logo.',
       ),
     ];
@@ -143,146 +143,125 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   // Content overlay
-                  Positioned.fill(
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24),
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            // allow full width on mobile, but cap width on wider screens
-                            maxWidth: isMobile ? double.infinity : 1100,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Union Shop – Official Students\' Union Store',
-                                style: TextStyle(
-                                  fontSize: isMobile ? 20 : 32,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  height: 1.2,
-                                ),
-                                textAlign: TextAlign.center,
+                  Positioned(
+                    left: isMobile ? 16 : 24,
+                    right: isMobile ? 16 : 24,
+                    top: isMobile ? 36 : 80,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          // allow full width on mobile, but cap width on wider screens
+                          maxWidth: isMobile ? double.infinity : 900,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Union Shop – Official Students\' Union Store',
+                              style: TextStyle(
+                                fontSize: isMobile ? 20 : 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 1.2,
                               ),
-                              SizedBox(height: isMobile ? 12 : 16),
-                              Text(
-                                "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
-                                style: TextStyle(
-                                  fontSize: isMobile ? 14 : 20,
-                                  color: Colors.white,
-                                  height: 1.4,
-                                ),
-                                textAlign: TextAlign.center,
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: isMobile ? 12 : 16),
+                            Text(
+                              "Support your Students' Union — campus essentials, course supplies and official merch. Browse online or visit our campus store.",
+                              style: TextStyle(
+                                fontSize: isMobile ? 14 : 20,
+                                color: Colors.white,
+                                height: 1.4,
                               ),
-                              SizedBox(height: isMobile ? 20 : 32),
-                              // buttons: stack vertically on mobile for easier tapping
-                              isMobile
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12.0),
-                                          child: ElevatedButton(
-                                            onPressed: () =>
-                                                navigateToProduct(context),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color(0xFF4d2963),
-                                              foregroundColor: Colors.white,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.zero),
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 14.0),
-                                              child: Text('SHOP NOW',
-                                                  style: TextStyle(
-                                                      letterSpacing: 1)),
-                                            ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: isMobile ? 20 : 32),
+                            // buttons: stack vertically on mobile for easier tapping
+                            isMobile
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () =>
+                                            navigateToProduct(context),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF4d2963),
+                                          foregroundColor: Colors.white,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 14.0),
+                                          child: Text('SHOP NOW',
+                                              style:
+                                                  TextStyle(letterSpacing: 1)),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      OutlinedButton(
+                                        onPressed: () => Navigator.pushNamed(
+                                            context, '/personalisation'),
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFF4d2963),
+                                          side: const BorderSide(
+                                              color: Color(0xFF4d2963)),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 14.0),
+                                          child: Text('PERSONALISE',
+                                              style:
+                                                  TextStyle(letterSpacing: 1)),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () =>
+                                            navigateToProduct(context),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF4d2963),
+                                          foregroundColor: Colors.white,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.zero,
                                           ),
                                         ),
-                                        const SizedBox(height: 12),
-                                        OutlinedButton(
-                                          onPressed: () => Navigator.pushNamed(
-                                              context, '/personalisation'),
-                                          style: OutlinedButton.styleFrom(
-                                            foregroundColor:
-                                                const Color(0xFF4d2963),
-                                            side: const BorderSide(
-                                                color: Color(0xFF4d2963)),
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 14.0),
-                                            child: Text('PERSONALISE',
-                                                style: TextStyle(
-                                                    letterSpacing: 1)),
-                                          ),
+                                        child: const Text(
+                                          'SHOP NOW',
+                                          style: TextStyle(
+                                              fontSize: 14, letterSpacing: 1),
                                         ),
-                                      ],
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12.0),
-                                          child: ElevatedButton(
-                                            onPressed: () =>
-                                                navigateToProduct(context),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color(0xFF4d2963),
-                                              foregroundColor: Colors.white,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.zero,
-                                              ),
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 8.0,
-                                                  vertical: 12.0),
-                                              child: Text(
-                                                'SHOP NOW',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    letterSpacing: 1),
-                                              ),
-                                            ),
-                                          ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      OutlinedButton(
+                                        onPressed: () => Navigator.pushNamed(
+                                            context, '/personalisation'),
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor:
+                                              const Color(0xFF4d2963),
+                                          side: const BorderSide(
+                                              color: Color(0xFF4d2963)),
                                         ),
-                                        const SizedBox(width: 12),
-                                        OutlinedButton(
-                                          onPressed: () => Navigator.pushNamed(
-                                              context, '/personalisation'),
-                                          style: OutlinedButton.styleFrom(
-                                            foregroundColor:
-                                                const Color(0xFF4d2963),
-                                            side: const BorderSide(
-                                                color: Color(0xFF4d2963)),
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0,
-                                                vertical: 12.0),
-                                            child: Text('PERSONALISE',
-                                                style: TextStyle(
-                                                    letterSpacing: 1)),
-                                          ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 12.0),
+                                          child: Text('PERSONALISE',
+                                              style:
+                                                  TextStyle(letterSpacing: 1)),
                                         ),
-                                      ],
-                                    ),
-                            ],
-                          ),
+                                      ),
+                                    ],
+                                  ),
+                          ],
                         ),
                       ),
                     ),
@@ -312,19 +291,18 @@ class HomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
-                    SizedBox(height: isMobile ? 32 : 64),
+                    SizedBox(height: isMobile ? 24 : 48),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: isMobile ? 1 : 2,
-                      // slightly increased spacing for improved breathing room
-                      crossAxisSpacing: isMobile ? 16 : 28,
-                      mainAxisSpacing: isMobile ? 28 : 56,
+                      crossAxisSpacing: isMobile ? 12 : 24,
+                      mainAxisSpacing: isMobile ? 24 : 48,
                       childAspectRatio: isMobile ? 1.6 : 1.4,
                       children: products
                           .map((p) => Padding(
                                 padding: EdgeInsets.only(
-                                    bottom: isMobile ? 16.0 : 56.0,
+                                    bottom: isMobile ? 12.0 : 48.0,
                                     right: isMobile ? 0 : 0),
                                 child: ProductCard(product: p),
                               ))
@@ -384,31 +362,21 @@ class _ProductCardState extends State<ProductCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final width = constraints.maxWidth;
-                    // choose a consistent image height relative to card width
-                    final imageHeight = isMobile ? width * 0.55 : width * 0.6;
-                    return SizedBox(
-                      width: double.infinity,
-                      height: imageHeight,
-                      child: Image.network(
-                        widget.product.imageUrl,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Icon(Icons.image_not_supported,
-                                  color: Colors.grey),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
+                AspectRatio(
+                  aspectRatio: isMobile ? 1.6 : 1.8,
+                  child: Image.network(
+                    widget.product.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
