@@ -215,7 +215,8 @@ class _CollectionPageState extends State<CollectionPage> {
                         crossAxisCount: columns,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
-                        children: pageProducts.map((p) => Card(
+                        children: pageProducts.map((p) {
+                          return Card(
                             elevation: 2,
                             clipBehavior: Clip.hardEdge,
                             child: InkWell(
@@ -239,7 +240,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                           )
                                         : Container(color: Colors.grey[200]),
                                   ),
-                                  
+
                                   // Fixed-height text area to prevent overflow
                                   SizedBox(
                                     height: isMobile ? 64 : 80,
@@ -264,7 +265,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                 ],
                               ),
                             ),
-                          )).toList(),
+                          );
+                        }).toList(),
+                      ),
 
                     const SizedBox(height: 12),
                   ],

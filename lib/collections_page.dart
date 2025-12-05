@@ -78,6 +78,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
     final gridColumns = isMobile ? 2 : 4;
+    final gridChildAspect = isMobile ? 0.9 : 1.05;
     // pagination calculations
     final totalPages = (collections.length + _pageSize - 1) ~/ _pageSize;
     final startIndex = _currentPage * _pageSize;
@@ -143,6 +144,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: gridColumns,
+                    childAspectRatio: gridChildAspect,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     children: sampleCollections.take(4).map((c) {
@@ -205,6 +207,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: gridColumns,
+                    childAspectRatio: gridChildAspect,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     children: pageCollections.map((c) {
