@@ -215,8 +215,7 @@ class _CollectionPageState extends State<CollectionPage> {
                         crossAxisCount: columns,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
-                        children: pageProducts.map((p) {
-                          return Card(
+                        children: pageProducts.map((p) => Card(
                             elevation: 2,
                             clipBehavior: Clip.hardEdge,
                             child: InkWell(
@@ -225,8 +224,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+                                  // Constrain the image so it cannot push the card taller than available
                                   AspectRatio(
-                                    aspectRatio: isMobile ? 1.2 : 1.3,
+                                    aspectRatio: 3 / 4,
                                     child: p.imageUrl.isNotEmpty
                                         ? Image.network(
                                             p.imageUrl,
@@ -234,14 +234,15 @@ class _CollectionPageState extends State<CollectionPage> {
                                             width: double.infinity,
                                             errorBuilder: (context, error, stackTrace) => Container(
                                               color: Colors.grey[200],
-                                              child: const Center(
-                                                child: Icon(Icons.image_not_supported, color: Colors.grey),
-                                              ),
+                                              child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey)),
                                             ),
                                           )
                                         : Container(color: Colors.grey[200]),
                                   ),
-                                  Flexible(
+                                  
+                                  // Fixed-height text area to prevent overflow
+                                  SizedBox(
+                                    height: isMobile ? 64 : 80,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -263,9 +264,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                 ],
                               ),
                             ),
-                          );
-                        }).toList(),
-                      ),
+                          )).toList(),
 
                     const SizedBox(height: 12),
                   ],
