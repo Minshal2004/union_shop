@@ -268,7 +268,13 @@ class _ProductPageState extends State<ProductPage> {
               );
             }
 
-            // Desktop: two-column layout
+            // Desktop: two-column layout. Avoid Expanded inside a
+            // SingleChildScrollView by computing fixed widths from constraints.
+            final gap = 28.0;
+            final contentWidth = constraints.maxWidth;
+            final leftWidth = (contentWidth - gap) * 0.6;
+            final rightWidth = contentWidth - gap - leftWidth;
+
             return Column(
               children: [
                 AppHeader(onLogoTap: () => navigateToHome(context), onButtonPressed: () => placeholderCallbackForButtons(context)),
@@ -276,9 +282,9 @@ class _ProductPageState extends State<ProductPage> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(flex: 6, child: imageColumn),
-                    const SizedBox(width: 28),
-                    Expanded(flex: 4, child: detailsColumn),
+                    SizedBox(width: leftWidth, child: imageColumn),
+                    SizedBox(width: gap),
+                    SizedBox(width: rightWidth, child: detailsColumn),
                   ],
                 ),
                 const SizedBox(height: 32),
