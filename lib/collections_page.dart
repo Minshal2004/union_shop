@@ -145,78 +145,55 @@ class _CollectionsPageState extends State<CollectionsPage> {
                     crossAxisCount: gridColumns,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    // featured items use the static sampleCollections snapshot
-                    children: sampleCollections
-                        .take(4)
-                        .map((c) => Card(
-                              elevation: 2,
-                              clipBehavior: Clip.hardEdge,
-                              child: InkWell(
-                                onTap: () => Navigator.pushNamed(
-                                    context, '/collection',
-                                    arguments: c),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // Constrain image with a consistent aspect ratio
-                                    AspectRatio(
-                                      aspectRatio: 3 / 4,
-                                      child: c.imageUrl.isNotEmpty
-                                          ? Image.network(
-                                              c.imageUrl,
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              errorBuilder:
-                                                  (context, error, stackTrace) =>
-                                                      Container(
-                                                color: Colors.grey[200],
-                                                child: const Center(
-                                                  child: Icon(
-                                                      Icons.image_not_supported,
-                                                      color: Colors.grey),
-                                                ),
-                                              ),
-                                            )
-                                          : Container(color: Colors.grey[200]),
-                                    ),
-
-                                    // Constrain the text area height so cards don't overflow
-                                    SizedBox(
-                                      height: isMobile ? 64 : 80,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              c.title,
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            SizedBox(height: isMobile ? 6 : 8),
-                                            Text(
-                                              '${c.products.length} items',
-                                              style: const TextStyle(
-                                                  fontSize: 13,
-                                                  color: Colors.grey),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ],
+                    children: sampleCollections.take(4).map((c) {
+                      return Card(
+                        elevation: 2,
+                        clipBehavior: Clip.hardEdge,
+                        child: InkWell(
+                          onTap: () => Navigator.pushNamed(context, '/collection', arguments: c),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 3 / 4,
+                                child: c.imageUrl.isNotEmpty
+                                    ? Image.network(
+                                        c.imageUrl,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        errorBuilder: (context, error, stackTrace) => Container(
+                                          color: Colors.grey[200],
+                                          child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey)),
                                         ),
+                                      )
+                                    : Container(color: Colors.grey[200]),
+                              ),
+                              SizedBox(
+                                height: isMobile ? 64 : 80,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        c.title,
+                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(height: isMobile ? 6 : 8),
+                                      Text('${c.products.length} items', style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ))
-                        .toList(),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                   const SizedBox(height: 12),
                   const Text(
@@ -235,14 +212,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         elevation: 2,
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
-                          onTap: () => Navigator.pushNamed(
-                              context, '/collection',
-                              arguments: c),
+                          onTap: () => Navigator.pushNamed(context, '/collection', arguments: c),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Constrain image with a consistent aspect ratio
                               AspectRatio(
                                 aspectRatio: 3 / 4,
                                 child: c.imageUrl.isNotEmpty
@@ -250,20 +224,13 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                         c.imageUrl,
                                         fit: BoxFit.cover,
                                         width: double.infinity,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Container(
+                                        errorBuilder: (context, error, stackTrace) => Container(
                                           color: Colors.grey[200],
-                                          child: const Center(
-                                              child: Icon(
-                                                  Icons.image_not_supported,
-                                                  color: Colors.grey)),
+                                          child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey)),
                                         ),
                                       )
                                     : Container(color: Colors.grey[200]),
                               ),
-
-                              // Constrain the text area height so cards don't overflow
                               SizedBox(
                                 height: isMobile ? 64 : 80,
                                 child: Padding(
@@ -274,18 +241,12 @@ class _CollectionsPageState extends State<CollectionsPage> {
                                     children: [
                                       Text(
                                         c.title,
-                                        style: const TextStyle(
-                                            fontSize: 14, fontWeight: FontWeight.w600),
+                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       SizedBox(height: isMobile ? 6 : 8),
-                                      Text(
-                                        '${c.products.length} items',
-                                        style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                      Text('${c.products.length} items', style: const TextStyle(fontSize: 13, color: Colors.grey)),
                                     ],
                                   ),
                                 ),
